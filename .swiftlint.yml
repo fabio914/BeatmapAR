@@ -1,0 +1,45 @@
+excluded: 
+  - Carthage
+
+opt_in_rules:
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiline_parameters_brackets
+  - multiline_arguments
+
+line_length:
+    warning: 150
+    ignores_comments: true
+file_length: 600
+
+nesting:
+  type_level: 3
+
+type_name:
+    max_length: 50
+
+identifier_name:
+  excluded:
+      - ok
+      - id
+      - to
+      - cc
+      - vc
+      - vm
+      - nc
+      - qa
+      - op
+      - a
+      - b
+      - c 
+      - f
+      - i
+      - j
+      - o
+      - f
+      - x
+      - y
+
+cyclomatic_complexity:
+  ignores_case_statements: true
+

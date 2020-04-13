@@ -1,0 +1,105 @@
+name: Beatmap
+
+settings:
+  base:
+    SWIFT_VERSION: '5.1'
+    ENABLE_BITCODE: NO
+  configs:
+    Release:
+      SWIFT_COMPILATION_MODE: 'wholemodule'
+
+options:
+  bundleIdPrefix: com.beatmap
+  xcodeVersion: 11.3.1
+  usesTabs: false
+  indentWidth: 4
+  deploymentTarget:
+    iOS: 13.0
+
+targets:
+  BeatmapAR:
+    type: application
+    platform: iOS
+    info:
+      path: BeatmapAR/Info.plist
+      properties:
+        UIUserInterfaceStyle: Light
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UILaunchStoryboardName: LaunchScreen
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        ITSAppUsesNonExemptEncryption: false
+        NSCameraUsageDescription: BeatmapAR needs access to your camera to display the AR experience.
+    sources:
+      - path: README.md
+        buildPhase: none
+      - path: BeatmapAR
+        createIntermediateGroups: true
+    dependencies:
+      - target: BeatmapLoader
+    preBuildScripts:
+      - name: Generate Warnings
+        script: |
+                if [ "${CONFIGURATION}" = "Debug" ]; then
+                  TAGS="TODO:|FIXME:"
+                  find "${PROJECT_DIR}/BeatmapAR" \( -name "*.h" -or -name "*.m" -or -name "*.swift" \) -print0 | xargs -0 egrep --with-filename --line-number --only-matching "($TAGS).*\$" | perl -p -e "s/($TAGS)/ warning: \$1/"
+                fi
+      - name: Swift Lint
+        script: |
+                if which swiftlint >/dev/null; then
+                    swiftlint
+                else
+                    echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                fi
+
+  BeatmapLoader:
+    type: framework
+    platform: iOS
+    sources:
+      - path: BeatmapLoader
+        createIntermediateGroups: true
+    preBuildScripts:
+      - name: Generate Warnings
+        script: |
+                if [ "${CONFIGURATION}" = "Debug" ]; then
+                  TAGS="TODO:|FIXME:"
+                  find "${PROJECT_DIR}/BeatmapLoader" \( -name "*.h" -or -name "*.m" -or -name "*.swift" \) -print0 | xargs -0 egrep --with-filename --line-number --only-matching "($TAGS).*\$" | perl -p -e "s/($TAGS)/ warning: \$1/"
+                fi
+      - name: Swift Lint
+        script: |
+                if which swiftlint >/dev/null; then
+                    swiftlint
+                else
+                    echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                fi
+
+  BeatmapLoaderTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: BeatmapLoaderTests
+        createIntermediateGroups: true
+    dependencies:
+      - target: BeatmapLoader
+      
+schemes:
+  BeatmapAR:
+    build:
+      targets:
+        BeatmapAR: all
+  BeatmapLoader:
+    build:
+      targets:
+        BeatmapLoader: all
+    test:
+      gatherCoverageData: true
+      targets:
+        - BeatmapLoaderTests
