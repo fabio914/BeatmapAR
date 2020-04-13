@@ -1,4 +1,6 @@
-# BeatmapAR
+![Blocks](Images/blocks.png)
+
+# Beatmap AR
 
 Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 
