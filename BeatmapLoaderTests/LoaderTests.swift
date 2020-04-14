@@ -1,25 +1,38 @@
 import XCTest
 @testable import BeatmapLoader
+import ZIPFoundation
 
 final class TestLoaderDataSource: BeatmapLoaderDataSourceProtocol {
 
-    func loader(_ loader: BeatmapLoader, dataForFileNamed fileName: String) -> Data? {
-        let bundle = Bundle(for: type(of: self))
-        let fileComponents = fileName.split(separator: ".")
-        let resource = String(fileComponents.dropLast().joined())
+    private let zipFileName: String
 
-        guard let type = fileComponents.last,
-            let url = bundle.url(forResource: resource, withExtension: String(type))
+    private lazy var archive: Archive? = {
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: zipFileName, withExtension: "zip") else {
+            return nil
+        }
+        return Archive(url: url, accessMode: .read)
+    }()
+
+    init(zipFileName: String) {
+        self.zipFileName = zipFileName
+    }
+
+    func loader(_ loader: BeatmapLoader, dataForFileNamed fileName: String) -> Data? {
+        var result = Data()
+
+        guard let entry = archive?[fileName],
+            let _ = try? archive?.extract(entry, consumer: { chunk in result.append(chunk) })
         else {
             return nil
         }
 
-        return try? Data(contentsOf: url)
+        return result
     }
 }
 
 final class LoaderTests: XCTestCase {
-    let dataSource = TestLoaderDataSource()
+    let dataSource = TestLoaderDataSource(zipFileName: "TestSong")
     lazy var loader = BeatmapLoader(dataSource: dataSource)
 
     func testLoadSong() {

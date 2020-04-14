@@ -45,6 +45,7 @@ targets:
         createIntermediateGroups: true
     dependencies:
       - target: BeatmapLoader
+      - carthage: ZIPFoundation
     preBuildScripts:
       - name: Generate Warnings
         script: |
@@ -89,7 +90,8 @@ targets:
         createIntermediateGroups: true
     dependencies:
       - target: BeatmapLoader
-      
+      - carthage: ZIPFoundation
+
 schemes:
   BeatmapAR:
     build:

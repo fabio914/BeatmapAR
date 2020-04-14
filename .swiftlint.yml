@@ -7,6 +7,9 @@ opt_in_rules:
   - multiline_parameters_brackets
   - multiline_arguments
 
+disabled_rules:
+ - unused_optional_binding
+
 line_length:
     warning: 150
     ignores_comments: true
