@@ -14,27 +14,34 @@ Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 
 ## Building
 
-1. Run Carthage bootstrap to download and build the project dependencies
+1. Clone this repository
+
+```shell
+git clone https://github.com/fabio914/BeatmapAR.git
+cd BeatmapAR/
+```
+
+2. Run Carthage bootstrap to download and build the project dependencies
 
 ```shell
 carthage bootstrap
 ```
 
-2. Run XcodeGen to generate the Xcode project file:
+3. Run XcodeGen to generate the Xcode project file:
 
 ```shell
 xcodegen
 ```
 
-3. Open the Xcode project:
+4. Open the Xcode project:
 
 ```shell
 open Beatmap.xcodeproj/
 ```
 
-4. Set a "signing team" and create a new provisioning profile;
+5. Set a "signing team" and create a new provisioning profile;
 
-5. Build and run on an iOS device (**⌘ + R**).
+6. Build and run on an iOS device (**⌘ + R**).
 
 ## Contributors
 
