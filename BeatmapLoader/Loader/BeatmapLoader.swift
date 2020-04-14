@@ -20,7 +20,43 @@ public final class BeatmapLoader {
         self.dataSource = dataSource
     }
 
+    public func loadPreview() throws -> BeatmapPreview {
+        try preview(from: try loadInfo())
+    }
+
     public func loadMap() throws -> BeatmapSong {
+
+        let info = try loadInfo()
+        let preview = try self.preview(from: info)
+
+        guard let standardBeatmap = info.difficultyBeatmapSets
+            .first(where: { $0.beatmapCharacteristicName == .standard })
+        else {
+            throw BeatmapLoaderError.standardBeatmapMissing
+        }
+
+        let standardDifficulties = try standardBeatmap.difficultyBeatmaps
+            .map({ beatmap -> BeatmapSongDifficulty in
+                guard let mapData = dataSource?.loader(self, dataForFileNamed: beatmap.beatmapFilename),
+                    let map = try? JSONDecoder().decode(BeatmapDifficultyModel.self, from: mapData)
+                else {
+                    throw BeatmapLoaderError.unableToLoadMapDifficulty(beatmap.beatmapFilename)
+                }
+
+                return .init(
+                    difficulty: beatmap.difficultyRank.difficulty,
+                    notes: map.notes
+                        .sorted(by: { $0.time < $1.time })
+                        .map({ $0.asNoteEvent(with: info.beatsPerMinute, offset: info.songTimeOffset) })
+                )
+            })
+
+        return .init(preview: preview, standardDifficulties: standardDifficulties)
+    }
+
+    // MARK: - Private
+
+    private func loadInfo() throws -> BeatmapInfoModel {
 
         guard let infoData = dataSource?.loader(self, dataForFileNamed: beatmapInfoFileName),
             let info = try? JSONDecoder().decode(BeatmapInfoModel.self, from: infoData)
@@ -28,14 +64,15 @@ public final class BeatmapLoader {
             throw BeatmapLoaderError.unableToLoadBeatmapInfo
         }
 
+        return info
+    }
+
+    private func preview(from info: BeatmapInfoModel) throws -> BeatmapPreview {
+
         guard let coverImageData = dataSource?.loader(self, dataForFileNamed: info.coverImageFilename),
             let coverImage = UIImage(data: coverImageData)
         else {
             throw BeatmapLoaderError.unableToLoadCoverImage
-        }
-
-        guard let standardBeatmap = info.difficultyBeatmapSets.first else {
-            throw BeatmapLoaderError.standardBeatmapMissing
         }
 
         return .init(
@@ -44,22 +81,7 @@ public final class BeatmapLoader {
             songAuthorName: info.songAuthorName,
             levelAuthorName: info.levelAuthorName,
             beatsPerMinute: info.beatsPerMinute,
-            coverImage: coverImage,
-            difficulties: try standardBeatmap.difficultyBeatmaps
-                .map({ beatmap in
-                    guard let mapData = dataSource?.loader(self, dataForFileNamed: beatmap.beatmapFilename),
-                        let map = try? JSONDecoder().decode(BeatmapDifficultyModel.self, from: mapData)
-                    else {
-                        throw BeatmapLoaderError.unableToLoadMapDifficulty(beatmap.beatmapFilename)
-                    }
-
-                    return .init(
-                        difficulty: beatmap.difficultyRank.difficulty,
-                        notes: map.notes
-                            .sorted(by: { $0.time < $1.time })
-                            .map({ $0.asNoteEvent(with: info.beatsPerMinute, offset: info.songTimeOffset) })
-                    )
-                })
+            coverImage: coverImage
         )
     }
 }

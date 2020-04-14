@@ -8,12 +8,17 @@ internal struct BeatmapInfoModel: Decodable {
 
         enum SupportedCharacteristic: String, Decodable {
             case standard = "Standard"
-//            case oneSaber = "OneSaber"
-//            case noArrows = "NoArrows"
-//            case _90Degree = "360Degree"
-//            case _360Degree = "90Degree"
-//            case lightshow = "Lightshow"
-//            case lawless = "Lawless"
+            case oneSaber = "OneSaber"
+            case noArrows = "NoArrows"
+
+            // swiftlint:disable:next identifier_name
+            case _90Degree = "360Degree"
+
+            // swiftlint:disable:next identifier_name
+            case _360Degree = "90Degree"
+
+            case lightshow = "Lightshow"
+            case lawless = "Lawless"
         }
 
         struct Beatmap: Decodable {

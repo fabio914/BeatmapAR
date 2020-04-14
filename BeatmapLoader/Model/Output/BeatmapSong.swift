@@ -78,11 +78,6 @@ public struct BeatmapSongDifficulty {
 }
 
 public struct BeatmapSong {
-    public let songName: String
-    public let songSubName: String
-    public let songAuthorName: String
-    public let levelAuthorName: String
-    public let beatsPerMinute: UInt
-    public let coverImage: UIImage
-    public let difficulties: [BeatmapSongDifficulty]
+    public let preview: BeatmapPreview
+    public let standardDifficulties: [BeatmapSongDifficulty]
 }
