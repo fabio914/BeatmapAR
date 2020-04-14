@@ -26,5 +26,14 @@ final class LoaderTests: XCTestCase {
         let map = try? loader.loadMap()
         XCTAssertNotNil(map)
         XCTAssertEqual(map?.songName, "Test Song Name")
+        XCTAssertEqual(map?.songSubName, "Test Song SubName")
+        XCTAssertEqual(map?.songAuthorName, "Test Artist")
+        XCTAssertEqual(map?.levelAuthorName, "Test Mapper")
+        XCTAssertEqual(map?.beatsPerMinute, 120)
+        XCTAssertEqual(map?.songTimeOffset, 0)
+
+        XCTAssertEqual(map?.difficulties.count, 2)
+        XCTAssertEqual(map?.difficulties[0].difficulty, .normal)
+        XCTAssertEqual(map?.difficulties[1].difficulty, .expert)
     }
 }
