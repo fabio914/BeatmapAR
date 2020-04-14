@@ -38,11 +38,22 @@ targets:
           NSAllowsArbitraryLoads: true
         ITSAppUsesNonExemptEncryption: false
         NSCameraUsageDescription: BeatmapAR needs access to your camera to display the AR experience.
+        UIAppFonts:
+         - Teko-Bold.ttf
+         - Teko-Light.ttf
+         - Teko-Medium.ttf
+         - Teko-Regular.ttf
+         - Teko-SemiBold.ttf
     sources:
       - path: README.md
         buildPhase: none
       - path: BeatmapAR
         createIntermediateGroups: true
+        excludes:
+         - "Assets/Fonts/Teko/OFL.txt"
+      - path: BeatmapAR/Assets/Fonts/Teko/OFL.txt
+        createIntermediateGroups: true
+        buildPhase: none
     dependencies:
       - target: BeatmapLoader
       - carthage: ZIPFoundation
