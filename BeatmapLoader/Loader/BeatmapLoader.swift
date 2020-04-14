@@ -44,19 +44,22 @@ public final class BeatmapLoader {
             songAuthorName: info.songAuthorName,
             levelAuthorName: info.levelAuthorName,
             beatsPerMinute: info.beatsPerMinute,
-            songTimeOffset: info.songTimeOffset,
             coverImage: coverImage,
-            difficulties: try standardBeatmap.difficultyBeatmaps.map({ beatmap in
-                guard let mapData = dataSource?.loader(self, dataForFileNamed: beatmap.beatmapFilename),
-                    let map = try? JSONDecoder().decode(BeatmapDifficultyModel.self, from: mapData)
-                else {
-                    throw BeatmapLoaderError.unableToLoadMapDifficulty(beatmap.beatmapFilename)
-                }
+            difficulties: try standardBeatmap.difficultyBeatmaps
+                .map({ beatmap in
+                    guard let mapData = dataSource?.loader(self, dataForFileNamed: beatmap.beatmapFilename),
+                        let map = try? JSONDecoder().decode(BeatmapDifficultyModel.self, from: mapData)
+                    else {
+                        throw BeatmapLoaderError.unableToLoadMapDifficulty(beatmap.beatmapFilename)
+                    }
 
-                return .init(
-                    difficulty: beatmap.difficultyRank.difficulty
-                )
-            })
+                    return .init(
+                        difficulty: beatmap.difficultyRank.difficulty,
+                        notes: map.notes
+                            .sorted(by: { $0.time < $1.time })
+                            .map({ $0.asNoteEvent(with: info.beatsPerMinute, offset: info.songTimeOffset) })
+                    )
+                })
         )
     }
 }

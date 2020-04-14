@@ -36,17 +36,22 @@ final class LoaderTests: XCTestCase {
     lazy var loader = BeatmapLoader(dataSource: dataSource)
 
     func testLoadSong() {
-        let map = try? loader.loadMap()
+        let map: BeatmapSong! = try? loader.loadMap()
         XCTAssertNotNil(map)
-        XCTAssertEqual(map?.songName, "Test Song Name")
-        XCTAssertEqual(map?.songSubName, "Test Song SubName")
-        XCTAssertEqual(map?.songAuthorName, "Test Artist")
-        XCTAssertEqual(map?.levelAuthorName, "Test Mapper")
-        XCTAssertEqual(map?.beatsPerMinute, 120)
-        XCTAssertEqual(map?.songTimeOffset, 0)
+        XCTAssertEqual(map.songName, "Test Song Name")
+        XCTAssertEqual(map.songSubName, "Test Song SubName")
+        XCTAssertEqual(map.songAuthorName, "Test Artist")
+        XCTAssertEqual(map.levelAuthorName, "Test Mapper")
+        XCTAssertEqual(map.beatsPerMinute, 120)
 
-        XCTAssertEqual(map?.difficulties.count, 2)
-        XCTAssertEqual(map?.difficulties[0].difficulty, .normal)
-        XCTAssertEqual(map?.difficulties[1].difficulty, .expert)
+        XCTAssertEqual(map.difficulties.count, 2)
+        XCTAssertEqual(map.difficulties[0].difficulty, .normal)
+        XCTAssertEqual(map.difficulties[1].difficulty, .expert)
+
+        let normalMap = map.difficulties[0]
+        XCTAssertEqual(normalMap.bombCount, 2)
+        XCTAssertEqual(normalMap.noteCount, 32)
+        XCTAssertEqual(normalMap.duration, 5.5)
+        XCTAssertEqual(floor(normalMap.notesPerSecond), 5) // TODO: Check this value
     }
 }
