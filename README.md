@@ -1,4 +1,4 @@
-![Blocks](Images/blocks.png)
+![AppIcon](Images/AppIcon.png)
 
 # Beatmap AR
 
@@ -46,5 +46,7 @@ open Beatmap.xcodeproj/
 ## Contributors
 
 [Fabio Dela Antonio](http://github.com/fabio914)
+
+![Blocks](Images/blocks.png)
 
 *This project isn't affiliated with Beat Games nor Beat Saber.*
