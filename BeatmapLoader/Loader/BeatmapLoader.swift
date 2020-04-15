@@ -7,6 +7,7 @@ public protocol BeatmapLoaderDataSourceProtocol: AnyObject {
 public enum BeatmapLoaderError: Error {
     case unableToLoadBeatmapInfo
     case unableToLoadCoverImage
+    case unableToLoadSongFile
     case standardBeatmapMissing
     case unableToLoadMapDifficulty(_ named: String)
 }
@@ -15,6 +16,7 @@ public final class BeatmapLoader {
     private weak var dataSource: BeatmapLoaderDataSourceProtocol?
 
     private let beatmapInfoFileName = "info.dat"
+    private let alternativeBeatmapInfoFileName = "Info.dat"
 
     public init(dataSource: BeatmapLoaderDataSourceProtocol) {
         self.dataSource = dataSource
@@ -28,6 +30,10 @@ public final class BeatmapLoader {
 
         let info = try loadInfo()
         let preview = try self.preview(from: info)
+
+        guard let song = dataSource?.loader(self, dataForFileNamed: info.songFilename) else {
+            throw BeatmapLoaderError.unableToLoadSongFile
+        }
 
         guard let standardBeatmap = info.difficultyBeatmapSets
             .first(where: { $0.beatmapCharacteristicName == .standard })
@@ -51,14 +57,17 @@ public final class BeatmapLoader {
                 )
             })
 
-        return .init(preview: preview, standardDifficulties: standardDifficulties)
+        return .init(preview: preview, song: song, standardDifficulties: standardDifficulties)
     }
 
     // MARK: - Private
 
     private func loadInfo() throws -> BeatmapInfoModel {
 
-        guard let infoData = dataSource?.loader(self, dataForFileNamed: beatmapInfoFileName),
+        guard
+            let infoData =
+                dataSource?.loader(self, dataForFileNamed: beatmapInfoFileName) ??
+                dataSource?.loader(self, dataForFileNamed: alternativeBeatmapInfoFileName),
             let info = try? JSONDecoder().decode(BeatmapInfoModel.self, from: infoData)
         else {
             throw BeatmapLoaderError.unableToLoadBeatmapInfo

@@ -12,6 +12,10 @@ Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 - [Carthage](https://github.com/Carthage/Carthage)
 - [SwiftLint](https://github.com/realm/SwiftLint) (optional)
 
+## Dependencies
+
+This project uses [ZIPFoundation](https://github.com/weichsel/ZIPFoundation) and [APAudioPlayer](https://github.com/Alterplay/APAudioPlayer) (that uses [BASS](http://www.un4seen.com/bass.html)).
+
 ## Building
 
 1. Clone this repository

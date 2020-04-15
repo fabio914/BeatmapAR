@@ -58,7 +58,8 @@ extension SongsViewController: TestSceneCellDelegate {
 extension SongsViewController: SongCellDelegate {
 
     func song(_ cell: SongCell, didSelectFile file: BeatmapFilePreview) {
-        // TODO: Present song view controller
+        let viewController = SongViewController(filePreview: file)
+        present(viewController, animated: true, completion: nil)
     }
 
     func song(_ cell: SongCell, didDeleteFile file: BeatmapFilePreview) {

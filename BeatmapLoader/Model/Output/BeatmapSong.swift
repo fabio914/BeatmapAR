@@ -79,5 +79,6 @@ public struct BeatmapSongDifficulty {
 
 public struct BeatmapSong {
     public let preview: BeatmapPreview
+    public let song: Data
     public let standardDifficulties: [BeatmapSongDifficulty]
 }

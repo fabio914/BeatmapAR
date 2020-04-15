@@ -69,6 +69,7 @@ targets:
     dependencies:
       - target: BeatmapLoader
       - carthage: ZIPFoundation
+      - target: APAudioPlayer
     preBuildScripts:
       - name: Generate Warnings
         script: |
@@ -114,6 +115,43 @@ targets:
     dependencies:
       - target: BeatmapLoader
       - carthage: ZIPFoundation
+
+  APAudioPlayer:
+    type: framework
+    platform: iOS
+    settings:
+      OTHER_LDFLAGS: -ObjC
+      LIBRARY_SEARCH_PATHS: $(PROJECT_DIR)/APAudioPlayer/bass/libs
+    sources:
+      - path: APAudioPlayer
+        createIntermediateGroups: true
+        excludes:
+         - "bass"
+      - path: APAudioPlayer/bass/bass.h
+        createIntermediateGroups: true
+        buildPhase: headers
+        headerVisibility: private
+      - path: APAudioPlayer/bass/libs
+        createIntermediateGroups: true
+        buildPhase: none
+    dependencies:
+     - framework: libbass.a
+       link: true
+       embed: false
+     - framework: libbassflac.a
+       link: true
+       embed: false
+     - framework: libbassopus.a
+       link: true
+       embed: false
+     - framework: libbasswv.a
+       link: true
+       embed: false
+     - sdk: AVFoundation.framework
+     - sdk: AudioToolbox.framework
+     - sdk: SystemConfiguration.framework
+     - sdk: CFNetwork.framework
+     - sdk: Accelerate.framework
 
 schemes:
   BeatmapAR:
