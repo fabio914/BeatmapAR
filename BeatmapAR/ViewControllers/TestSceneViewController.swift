@@ -60,6 +60,12 @@ final class TestSceneViewController: UIViewController {
             light.temperature = ambientColorTemperature
         }
     }
+
+    // MARK: - Actions
+
+    @IBAction func closeAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - ARSCNViewDelegate

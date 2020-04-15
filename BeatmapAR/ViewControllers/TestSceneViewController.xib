@@ -7,8 +7,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Teko-SemiBold.ttf">
-            <string>Teko-SemiBold</string>
+        <array key="Teko-Regular.ttf">
+            <string>Teko-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -27,21 +27,31 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </arscnView>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAF-ck-sir">
-                    <rect key="frame" x="146" y="811" width="122" height="31"/>
+                    <rect key="frame" x="177.5" y="811" width="59" height="31"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TX-W5-b5X">
-                            <rect key="frame" x="8" y="0.0" width="106" height="34.5"/>
-                            <fontDescription key="fontDescription" name="Teko-SemiBold" family="Teko" pointSize="24"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLOSE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TX-W5-b5X">
+                            <rect key="frame" x="8" y="0.0" width="43" height="34.5"/>
+                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZK-CO-E3q">
+                            <rect key="frame" x="0.0" y="0.0" width="59" height="31"/>
+                            <connections>
+                                <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="Zfh-07-iWn"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="eZK-CO-E3q" secondAttribute="trailing" id="1OK-NA-oVY"/>
+                        <constraint firstAttribute="bottom" secondItem="eZK-CO-E3q" secondAttribute="bottom" id="GTC-B9-5uO"/>
                         <constraint firstItem="7TX-W5-b5X" firstAttribute="baseline" secondItem="JAF-ck-sir" secondAttribute="bottom" constant="-8" id="TkI-oR-yZM"/>
                         <constraint firstItem="7TX-W5-b5X" firstAttribute="top" secondItem="JAF-ck-sir" secondAttribute="top" id="bLd-pw-J93"/>
                         <constraint firstItem="7TX-W5-b5X" firstAttribute="leading" secondItem="JAF-ck-sir" secondAttribute="leading" constant="8" id="dMV-bb-gHh"/>
                         <constraint firstAttribute="trailing" secondItem="7TX-W5-b5X" secondAttribute="trailing" constant="8" id="hUr-tQ-tH8"/>
+                        <constraint firstItem="eZK-CO-E3q" firstAttribute="top" secondItem="JAF-ck-sir" secondAttribute="top" id="qVS-0i-Cd1"/>
+                        <constraint firstItem="eZK-CO-E3q" firstAttribute="leading" secondItem="JAF-ck-sir" secondAttribute="leading" id="vjt-uR-KEd"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

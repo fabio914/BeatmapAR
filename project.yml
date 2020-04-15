@@ -23,6 +23,7 @@ targets:
     info:
       path: BeatmapAR/Info.plist
       properties:
+        CFBundleDisplayName: $(DISPLAY_NAME)
         UIUserInterfaceStyle: Light
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
@@ -44,6 +45,17 @@ targets:
          - Teko-Medium.ttf
          - Teko-Regular.ttf
          - Teko-SemiBold.ttf
+        UIFileSharingEnabled: true
+#        LSSupportsOpeningDocumentsInPlace: true
+        CFBundleDocumentTypes:
+         - CFBundleTypeName: Zip archive
+           CFBundleTypeRole: Editor
+           LSHandlerRank: Owner
+           LSItemContentTypes:
+            - com.pkware.zip-archive
+           UTTypeTagSpecification:
+             public.filename-extension: zip
+             public.mime-type: application/zip
     sources:
       - path: README.md
         buildPhase: none

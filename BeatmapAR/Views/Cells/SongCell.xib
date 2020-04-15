@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Teko-Regular.ttf">
+            <string>Teko-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SongCell" customModule="BeatmapAR" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="x5B-3p-3bi" customClass="SongCellView" customModule="BeatmapAR" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="x5B-3p-3bi" id="EIE-dY-aPN">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fTm-SO-gyB">
+                        <rect key="frame" x="16" y="0.0" width="60" height="60"/>
+                        <color key="backgroundColor" red="0.0" green="0.094117647060000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="fTm-SO-gyB" secondAttribute="height" multiplier="1:1" id="lTd-Yg-sbl"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-t5-3hz">
+                        <rect key="frame" x="16" y="59.5" width="382" height="0.5"/>
+                        <color key="backgroundColor" red="0.0" green="0.094117647060000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="M81-3Q-aBb"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zo6-6Y-T7Q">
+                        <rect key="frame" x="84" y="4" width="314" height="29"/>
+                        <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqd-Ch-MTo">
+                        <rect key="frame" x="84" y="33" width="314" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="REb-Ez-9z6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="20"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fTm-SO-gyB" firstAttribute="top" secondItem="EIE-dY-aPN" secondAttribute="top" id="1Pv-KU-a7P"/>
+                    <constraint firstItem="zo6-6Y-T7Q" firstAttribute="leading" secondItem="fTm-SO-gyB" secondAttribute="trailing" constant="8" id="1iY-vC-3h1"/>
+                    <constraint firstItem="fTm-SO-gyB" firstAttribute="leading" secondItem="EIE-dY-aPN" secondAttribute="leading" constant="16" id="32r-gy-iwy"/>
+                    <constraint firstItem="Iqd-Ch-MTo" firstAttribute="top" secondItem="zo6-6Y-T7Q" secondAttribute="bottom" id="8Nv-5e-eJt"/>
+                    <constraint firstAttribute="bottom" secondItem="Iqd-Ch-MTo" secondAttribute="bottom" constant="4" id="CdS-zi-k6E"/>
+                    <constraint firstItem="zo6-6Y-T7Q" firstAttribute="top" secondItem="EIE-dY-aPN" secondAttribute="top" constant="4" id="Eh0-6a-vsy"/>
+                    <constraint firstAttribute="trailing" secondItem="Iqd-Ch-MTo" secondAttribute="trailing" constant="16" id="N1E-vE-FkC"/>
+                    <constraint firstItem="Iqd-Ch-MTo" firstAttribute="leading" secondItem="fTm-SO-gyB" secondAttribute="trailing" constant="8" id="c9o-ih-rIe"/>
+                    <constraint firstAttribute="bottom" secondItem="fTm-SO-gyB" secondAttribute="bottom" id="cWr-Xz-SL9"/>
+                    <constraint firstAttribute="trailing" secondItem="ANP-t5-3hz" secondAttribute="trailing" constant="16" id="ccY-1J-3bw"/>
+                    <constraint firstItem="ANP-t5-3hz" firstAttribute="leading" secondItem="EIE-dY-aPN" secondAttribute="leading" constant="16" id="kkm-tc-JZs"/>
+                    <constraint firstAttribute="bottom" secondItem="ANP-t5-3hz" secondAttribute="bottom" id="mlk-Yq-nYR"/>
+                    <constraint firstItem="fTm-SO-gyB" firstAttribute="centerY" secondItem="EIE-dY-aPN" secondAttribute="centerY" id="rJh-9v-ao8"/>
+                    <constraint firstAttribute="trailing" secondItem="zo6-6Y-T7Q" secondAttribute="trailing" constant="16" id="uSK-24-cPZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="artistNameLabel" destination="Iqd-Ch-MTo" id="mpx-ef-vKz"/>
+                <outlet property="coverImageView" destination="fTm-SO-gyB" id="mlI-9h-yjJ"/>
+                <outlet property="songNameLabel" destination="zo6-6Y-T7Q" id="BP2-pS-OEh"/>
+            </connections>
+            <point key="canvasLocation" x="38" y="66"/>
+        </tableViewCell>
+    </objects>
+</document>
