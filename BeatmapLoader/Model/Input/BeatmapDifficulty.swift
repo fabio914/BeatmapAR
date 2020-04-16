@@ -2,6 +2,26 @@ import Foundation
 
 internal struct BeatmapDifficultyModel: Decodable {
 
+    enum LineIndex: Int, Decodable {
+        case leftmost = 0
+        case left = 1
+        case right = 2
+        case rightmost = 3
+
+        var column: BeatmapColumn {
+            switch self {
+            case .leftmost:
+                return .leftmost
+            case .left:
+                return .left
+            case .right:
+                return .right
+            case .rightmost:
+                return .rightmost
+            }
+        }
+    }
+
     struct BeatmapNote: Decodable {
 
         enum CutDirection: Int, Decodable {
@@ -35,26 +55,6 @@ internal struct BeatmapDifficultyModel: Decodable {
                     return .topLeftToBottomRight
                 case .anyDirection:
                     return .anyDirection
-                }
-            }
-        }
-
-        enum LineIndex: Int, Decodable {
-            case leftmost = 0
-            case left = 1
-            case right = 2
-            case rightmost = 3
-
-            var column: BeatmapColumn {
-                switch self {
-                case .leftmost:
-                    return .leftmost
-                case .left:
-                    return .left
-                case .right:
-                    return .right
-                case .rightmost:
-                    return .rightmost
                 }
             }
         }
@@ -116,13 +116,46 @@ internal struct BeatmapDifficultyModel: Decodable {
         }
     }
 
+    struct BeatmapObstacle: Decodable {
+        enum ObstacleType: Int, Decodable {
+            case vertical = 0
+            case horizontal = 1
+        }
+
+        let duration: Double /* in beats */
+        let lineIndex: LineIndex
+        let time: Double /* in beats */
+        let type: ObstacleType
+        let width: Int
+
+        private enum CodingKeys: String, CodingKey {
+            case duration = "_duration"
+            case lineIndex = "_lineIndex"
+            case time = "_time"
+            case type = "_type"
+            case width = "_width"
+        }
+
+        func asObstacleEvent(with bpm: UInt, offset: TimeInterval) -> BeatmapObstacleEvent {
+            let secondsPerBeat = (bpm > 0) ? (60.0/Double(bpm)):0.0
+            let seconds: TimeInterval = secondsPerBeat * time + offset
+
+            return .init(
+                time: seconds,
+                duration: secondsPerBeat * duration
+                // TODO: Add other properties
+            )
+        }
+    }
+
     let version: SupportedSchemaVersion
     let notes: [BeatmapNote]
+    let obstacles: [BeatmapObstacle]
 
     private enum CodingKeys: String, CodingKey {
         case version = "_version"
 //        case events = "_events"
         case notes = "_notes"
-//        case obstacles = "_obstacles"
+        case obstacles = "_obstacles"
     }
 }

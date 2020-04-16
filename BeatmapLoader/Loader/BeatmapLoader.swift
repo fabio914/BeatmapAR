@@ -57,7 +57,10 @@ public final class BeatmapLoader {
                     difficulty: beatmap.difficultyRank.difficulty,
                     notes: map.notes
                         .sorted(by: { $0.time < $1.time })
-                        .map({ $0.asNoteEvent(with: info.beatsPerMinute, offset: preview.songTimeOffset) })
+                        .map({ $0.asNoteEvent(with: info.beatsPerMinute, offset: preview.songTimeOffset) }),
+                    obstacles: map.obstacles
+                        .sorted(by: { $0.time < $1.time })
+                        .map({ $0.asObstacleEvent(with: info.beatsPerMinute, offset: preview.songTimeOffset) })
                 )
             })
 

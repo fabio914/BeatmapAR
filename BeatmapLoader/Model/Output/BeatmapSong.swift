@@ -53,6 +53,12 @@ public struct BeatmapNoteEvent {
     public let note: BeatmapNote
 }
 
+public struct BeatmapObstacleEvent {
+    public let time: TimeInterval
+    public let duration: TimeInterval
+    // TODO: Add other properties
+}
+
 public struct BeatmapSongDifficulty {
     public let name: String
     public let difficulty: BeatmapDifficulty
@@ -60,15 +66,21 @@ public struct BeatmapSongDifficulty {
 
     public let noteCount: Int
     public let bombCount: Int
-    public let wallCount = 0 // We're still not loading obstacles
+    public let wallCount: Int
 
-    init(name: String, difficulty: BeatmapDifficulty, notes: [BeatmapNoteEvent]) {
+    init(
+        name: String,
+        difficulty: BeatmapDifficulty,
+        notes: [BeatmapNoteEvent],
+        obstacles: [BeatmapObstacleEvent]
+    ) {
         self.name = name
         self.difficulty = difficulty
         self.notes = notes
 
         self.bombCount = notes.filter({ $0.note.isBomb }).count
         self.noteCount = notes.count - bombCount
+        self.wallCount = obstacles.count
     }
 }
 
