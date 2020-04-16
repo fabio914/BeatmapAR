@@ -14,9 +14,19 @@ final class SongViewController: UIViewController {
     @IBOutlet private weak var songSubNameLabel: UILabel!
     @IBOutlet private weak var songArtistLabel: UILabel!
     @IBOutlet private weak var bpmLabel: UILabel!
+    @IBOutlet private weak var durationLabel: UILabel!
     @IBOutlet private weak var mapperLabel: UILabel!
+    @IBOutlet private weak var standardModeViewContainer: UIView!
+    @IBOutlet private weak var segmentedControl: UISegmentedControl!
+    @IBOutlet private weak var playViewContainer: UIView!
+
 
     private let filePreview: BeatmapFilePreview
+    private var map: BeatmapSong?
+    private var standardDifficulties: [BeatmapSongDifficulty]? {
+        map?.standardDifficulties
+    }
+
     private let audioPlayer = APAudioPlayer()
 
     init(filePreview: BeatmapFilePreview) {
@@ -72,11 +82,23 @@ final class SongViewController: UIViewController {
         mapperLabel.isHidden = mapper.isEmpty
 
         bpmLabel.text = "\(preview.beatsPerMinute)"
+
+        playViewContainer.layer.borderColor = UIColor.white.cgColor
+        playViewContainer.layer.borderWidth = 4
+        playViewContainer.layer.cornerRadius = 26
+
+        // TODO: Set other labels
+
+        self.map = map
     }
 
     // MARK: - Actions
 
     @IBAction private func closeAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction private func playAction(_ sender: Any) {
+        // TODO: Navigate to AR scene
     }
 }

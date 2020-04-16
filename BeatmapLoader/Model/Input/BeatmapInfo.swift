@@ -23,7 +23,7 @@ internal struct BeatmapInfoModel: Decodable {
 
         struct Beatmap: Decodable {
 
-            enum DifficultyRank: Int, Decodable {
+            enum DifficultyRank: Int, Comparable, Decodable {
                 case easy = 1
                 case normal = 3
                 case hard = 5
@@ -43,6 +43,10 @@ internal struct BeatmapInfoModel: Decodable {
                     case .expertPlus:
                         return .expertPlus
                     }
+                }
+
+                static func < (lhs: DifficultyRank, rhs: DifficultyRank) -> Bool {
+                    lhs.rawValue < rhs.rawValue
                 }
             }
 

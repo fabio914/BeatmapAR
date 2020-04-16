@@ -41,7 +41,10 @@ public final class BeatmapLoader {
             throw BeatmapLoaderError.standardBeatmapMissing
         }
 
-        let standardDifficulties = try standardBeatmap.difficultyBeatmaps
+        let sortedStandardBeatmaps = standardBeatmap.difficultyBeatmaps
+            .sorted(by: { $0.difficultyRank < $1.difficultyRank })
+
+        let standardDifficulties = try sortedStandardBeatmaps
             .map({ beatmap -> BeatmapSongDifficulty in
                 guard let mapData = dataSource?.loader(self, dataForFileNamed: beatmap.beatmapFilename),
                     let map = try? JSONDecoder().decode(BeatmapDifficultyModel.self, from: mapData)
