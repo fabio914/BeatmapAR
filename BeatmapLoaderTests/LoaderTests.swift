@@ -53,7 +53,5 @@ final class LoaderTests: XCTestCase {
         let normalMap = map.standardDifficulties[0]
         XCTAssertEqual(normalMap.bombCount, 2)
         XCTAssertEqual(normalMap.noteCount, 32)
-        XCTAssertEqual(normalMap.duration, 5.5)
-        XCTAssertEqual(floor(normalMap.notesPerSecond), 5) // TODO: Check this value
     }
 }
