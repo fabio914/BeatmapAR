@@ -121,7 +121,7 @@ targets:
     platform: iOS
     settings:
       OTHER_LDFLAGS: -ObjC
-      LIBRARY_SEARCH_PATHS: $(PROJECT_DIR)/APAudioPlayer/bass/libs
+      LIBRARY_SEARCH_PATHS: $(PROJECT_DIR)/APAudioPlayer/bass
     sources:
       - path: APAudioPlayer
         createIntermediateGroups: true
@@ -131,20 +131,11 @@ targets:
         createIntermediateGroups: true
         buildPhase: headers
         headerVisibility: private
-      - path: APAudioPlayer/bass/libs
+      - path: APAudioPlayer/bass/libbass.a
         createIntermediateGroups: true
         buildPhase: none
     dependencies:
      - framework: libbass.a
-       link: true
-       embed: false
-     - framework: libbassflac.a
-       link: true
-       embed: false
-     - framework: libbassopus.a
-       link: true
-       embed: false
-     - framework: libbasswv.a
        link: true
        embed: false
      - sdk: AVFoundation.framework

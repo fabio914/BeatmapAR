@@ -14,7 +14,7 @@ Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 
 ## Dependencies
 
-This project uses [ZIPFoundation](https://github.com/weichsel/ZIPFoundation) and [APAudioPlayer](https://github.com/Alterplay/APAudioPlayer) (that uses [BASS](http://www.un4seen.com/bass.html)).
+This project uses [ZIPFoundation](https://github.com/weichsel/ZIPFoundation) and a modified version of [APAudioPlayer](https://github.com/Alterplay/APAudioPlayer) (that uses [BASS](http://www.un4seen.com/bass.html)).
 
 ## Building
 

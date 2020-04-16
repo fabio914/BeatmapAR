@@ -56,12 +56,6 @@ void CALLBACK ChannelEndedCallback(HSYNC handle, DWORD channel, DWORD data, void
         _audioSession = audioSession;
         _notificationCenter = notificationCenter;
         
-        //Load flac
-        extern void BASSFLACplugin, BASSWVplugin, BASSOPUSplugin;
-        BASS_PluginLoad(&BASSFLACplugin, 0);
-        BASS_PluginLoad(&BASSWVplugin, 0);
-        BASS_PluginLoad(&BASSOPUSplugin, 0);
-        
         //BASS init
         BASS_Init(-1, 44100, 0, NULL, NULL);
         
