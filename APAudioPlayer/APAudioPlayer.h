@@ -30,6 +30,7 @@
 - (void)play;
 - (void)stop;
 - (BOOL)isPlaying;
+- (NSTimeInterval)length;
 
 /*
  Player values

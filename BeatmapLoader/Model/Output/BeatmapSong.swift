@@ -54,26 +54,21 @@ public struct BeatmapNoteEvent {
 }
 
 public struct BeatmapSongDifficulty {
+    public let name: String
     public let difficulty: BeatmapDifficulty
     public let notes: [BeatmapNoteEvent]
 
     public let noteCount: Int
     public let bombCount: Int
     public let wallCount = 0 // We're still not loading obstacles
-    public let duration: TimeInterval
-    public let notesPerSecond: Double
 
-    init(difficulty: BeatmapDifficulty, notes: [BeatmapNoteEvent]) {
+    init(name: String, difficulty: BeatmapDifficulty, notes: [BeatmapNoteEvent]) {
+        self.name = name
         self.difficulty = difficulty
         self.notes = notes
 
         self.bombCount = notes.filter({ $0.note.isBomb }).count
         self.noteCount = notes.count - bombCount
-
-        // TODO: Update this once we're loading obstacles and other events as well
-        // This should be the max(...) between all the different times (or use the song duration)
-        self.duration = notes.map({ $0.time }).max() ?? 0.0
-        self.notesPerSecond = (duration > 0.0) ? (Double(noteCount)/duration):0.0
     }
 }
 

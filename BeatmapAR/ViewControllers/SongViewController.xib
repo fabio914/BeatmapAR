@@ -20,10 +20,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SongViewController" customModule="BeatmapAR" customModuleProvider="target">
             <connections>
+                <outlet property="bombsLabel" destination="EZa-U7-RNj" id="99a-Mn-aao"/>
                 <outlet property="bpmLabel" destination="l6h-rY-fMu" id="jYS-WA-Zea"/>
                 <outlet property="coverImageView" destination="NmH-b4-t2c" id="xhu-g0-rI0"/>
                 <outlet property="durationLabel" destination="dXY-ZL-gKG" id="wGc-ZL-FlC"/>
                 <outlet property="mapperLabel" destination="xhE-rW-i3K" id="e66-7x-la8"/>
+                <outlet property="notesLabel" destination="rkA-JA-7fm" id="hwO-Xn-m9r"/>
+                <outlet property="notesPerSecondLabel" destination="8NC-WW-gmK" id="RP7-Ij-PfD"/>
                 <outlet property="playViewContainer" destination="spx-IM-zmc" id="gvx-ow-NfU"/>
                 <outlet property="segmentedControl" destination="zL6-L8-aoT" id="uEs-rN-OW7"/>
                 <outlet property="songArtistLabel" destination="3Uo-xB-0q4" id="tfD-xp-9Xw"/>
@@ -32,6 +35,7 @@
                 <outlet property="stackView" destination="2wL-rw-b5C" id="xlg-Jj-b1Q"/>
                 <outlet property="standardModeViewContainer" destination="3Hb-yK-9hQ" id="PoV-Cp-XFm"/>
                 <outlet property="view" destination="uvU-y6-4bz" id="6ve-Gf-ceG"/>
+                <outlet property="wallsLabel" destination="gnd-qa-7uJ" id="FWg-hl-KOm"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -181,7 +185,7 @@
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Hb-yK-9hQ">
                                             <rect key="frame" x="0.0" y="172" width="382" height="283"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2OJ-U3-KTN">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2OJ-U3-KTN">
                                                     <rect key="frame" x="8" y="8" width="366" height="267"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STANDARD" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nj5-h1-DlZ">
@@ -191,19 +195,19 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="eSf-DB-ifh">
-                                                            <rect key="frame" x="0.0" y="37" width="366" height="55"/>
+                                                            <rect key="frame" x="0.0" y="45" width="366" height="55"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vDs-XY-SAT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="73" height="55"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="61" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXY-ZL-gKG">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="34.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="34.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DURATION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wov-th-qAb">
-                                                                            <rect key="frame" x="0.0" y="34.5" width="73" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="34.5" width="61" height="20.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Light" family="Teko" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -211,16 +215,33 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dFK-kR-HKr">
-                                                                    <rect key="frame" x="73" y="0.0" width="73.5" height="55"/>
+                                                                    <rect key="frame" x="61" y="0.0" width="61" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-rY-fMu">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="34.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="34.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BPM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6so-Xe-GV4">
-                                                                            <rect key="frame" x="0.0" y="34.5" width="73.5" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="34.5" width="61" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" name="Teko-Light" family="Teko" pointSize="14"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="i6h-jo-P70">
+                                                                    <rect key="frame" x="122" y="0.0" width="61" height="55"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NC-WW-gmK">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="34.5"/>
+                                                                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NPS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILX-vw-Z0i">
+                                                                            <rect key="frame" x="0.0" y="34.5" width="61" height="20.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Light" family="Teko" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -228,16 +249,16 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yli-Ep-zYo">
-                                                                    <rect key="frame" x="146.5" y="0.0" width="73" height="55"/>
+                                                                    <rect key="frame" x="183" y="0.0" width="61" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkA-JA-7fm">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="34.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="34.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSf-Fz-iy3">
-                                                                            <rect key="frame" x="0.0" y="34.5" width="73" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="34.5" width="61" height="20.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Light" family="Teko" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -245,16 +266,16 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1rv-Jd-zla">
-                                                                    <rect key="frame" x="219.5" y="0.0" width="73.5" height="55"/>
+                                                                    <rect key="frame" x="244" y="0.0" width="61" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnd-qa-7uJ">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="34.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="34.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WALLS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Z9-3A-D6k">
-                                                                            <rect key="frame" x="0.0" y="34.5" width="73.5" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="34.5" width="61" height="20.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Light" family="Teko" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -262,16 +283,16 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fkQ-jw-xAe">
-                                                                    <rect key="frame" x="293" y="0.0" width="73" height="55"/>
+                                                                    <rect key="frame" x="305" y="0.0" width="61" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZa-U7-RNj">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="34.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="34.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOMBS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU9-Qa-5QS">
-                                                                            <rect key="frame" x="0.0" y="34.5" width="73" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="34.5" width="61" height="20.5"/>
                                                                             <fontDescription key="fontDescription" name="Teko-Light" family="Teko" pointSize="14"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -281,12 +302,15 @@
                                                             </subviews>
                                                         </stackView>
                                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-L8-aoT">
-                                                            <rect key="frame" x="0.0" y="100" width="366" height="108"/>
+                                                            <rect key="frame" x="0.0" y="116" width="366" height="84"/>
                                                             <segments>
                                                                 <segment title="First"/>
                                                                 <segment title="Second"/>
                                                             </segments>
                                                             <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <connections>
+                                                                <action selector="segmentedControlChanged:" destination="-1" eventType="valueChanged" id="33w-50-JSc"/>
+                                                            </connections>
                                                         </segmentedControl>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzp-0m-ZCN">
                                                             <rect key="frame" x="0.0" y="215" width="366" height="52"/>

@@ -50,11 +50,12 @@ internal struct BeatmapInfoModel: Decodable {
                 }
             }
 
+            let difficulty: String
             let difficultyRank: DifficultyRank
             let beatmapFilename: Filename
 
             private enum CodingKeys: String, CodingKey {
-//                case difficulty = "_difficulty"
+                case difficulty = "_difficulty"
                 case difficultyRank = "_difficultyRank"
                 case beatmapFilename = "_beatmapFilename"
 //                case noteJumpMovementSpeed = "_noteJumpMovementSpeed"

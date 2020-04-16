@@ -38,7 +38,10 @@ final class SongsViewController: UIViewController {
 
     @objc private func reload() {
         // TODO: Move this to a background thread
-        let previews = BeatmapFilePreviewLoader()?.loadFilePreviews()
+        let previews = BeatmapFilePreviewLoader()?
+            .loadFilePreviews()
+            .sorted(by: { $0.preview.songName < $1.preview.songName })
+
         let previewCells = (previews ?? []).map({ SongCell(file: $0, delegate: self) })
 
         tableView.setRows([TestSceneCell(delegate: self)] + previewCells)

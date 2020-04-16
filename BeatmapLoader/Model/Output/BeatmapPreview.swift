@@ -6,5 +6,6 @@ public struct BeatmapPreview {
     public let songAuthorName: String
     public let levelAuthorName: String
     public let beatsPerMinute: UInt
+    public let songTimeOffset: TimeInterval
     public let coverImage: UIImage
 }
