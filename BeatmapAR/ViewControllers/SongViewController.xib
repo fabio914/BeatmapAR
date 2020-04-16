@@ -88,7 +88,6 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="zrt-T7-UHl" firstAttribute="leading" secondItem="ZwA-4W-W90" secondAttribute="leading" constant="16" id="LCc-bX-rGb"/>
                         <constraint firstItem="o9V-vJ-xPV" firstAttribute="centerX" secondItem="ZwA-4W-W90" secondAttribute="centerX" id="WKy-TV-OMR"/>
                         <constraint firstAttribute="bottom" secondItem="zrt-T7-UHl" secondAttribute="bottom" id="bbj-UD-XTz"/>
                         <constraint firstAttribute="bottom" secondItem="o9V-vJ-xPV" secondAttribute="bottom" id="vAn-BS-UJ3"/>
@@ -98,65 +97,89 @@
                     <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIS-Ul-i3W" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="487"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2wL-rw-b5C">
-                                    <rect key="frame" x="16" y="16" width="382" height="640"/>
+                                    <rect key="frame" x="16" y="16" width="382" height="455"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="A0h-Zb-TeS">
-                                            <rect key="frame" x="0.0" y="0.0" width="382" height="341"/>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHp-Rb-F76">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="156"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6sw-3t-EO4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="200"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="A0h-Zb-TeS">
+                                                    <rect key="frame" x="8" y="8" width="366" height="140"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NmH-b4-t2c">
-                                                            <rect key="frame" x="91" y="0.0" width="200" height="200"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6sw-3t-EO4">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NmH-b4-t2c">
+                                                                    <rect key="frame" x="0.0" y="20" width="100" height="100"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="NmH-b4-t2c" secondAttribute="height" multiplier="1:1" id="fwC-On-TfY"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                            <integer key="value" value="8"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="NmH-b4-t2c" secondAttribute="height" multiplier="1:1" id="fwC-On-TfY"/>
+                                                                <constraint firstItem="NmH-b4-t2c" firstAttribute="leading" secondItem="6sw-3t-EO4" secondAttribute="leading" id="Ff5-nl-OrK"/>
+                                                                <constraint firstAttribute="width" constant="100" id="Hdh-cs-EGY"/>
+                                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NmH-b4-t2c" secondAttribute="bottom" id="XVn-ma-Gkz"/>
+                                                                <constraint firstItem="NmH-b4-t2c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6sw-3t-EO4" secondAttribute="top" id="fgs-Re-aLD"/>
+                                                                <constraint firstAttribute="trailing" secondItem="NmH-b4-t2c" secondAttribute="trailing" id="h8W-C7-0ag"/>
+                                                                <constraint firstItem="NmH-b4-t2c" firstAttribute="centerY" secondItem="6sw-3t-EO4" secondAttribute="centerY" id="vQh-yW-Eaz"/>
                                                             </constraints>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstItem="NmH-b4-t2c" firstAttribute="top" secondItem="6sw-3t-EO4" secondAttribute="top" id="7Pw-Cl-XPS"/>
-                                                        <constraint firstItem="NmH-b4-t2c" firstAttribute="centerX" secondItem="6sw-3t-EO4" secondAttribute="centerX" id="E1E-jP-7Rj"/>
-                                                        <constraint firstAttribute="bottom" secondItem="NmH-b4-t2c" secondAttribute="bottom" id="iGO-Yu-QzG"/>
-                                                        <constraint firstAttribute="height" constant="200" id="mjL-eN-VYw"/>
-                                                    </constraints>
-                                                </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vIt-ja-Hcp">
-                                                    <rect key="frame" x="0.0" y="208" width="382" height="133"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHL-Au-ZVS">
-                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="40.5"/>
-                                                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="28"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Sub Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rM-97-Fxx">
-                                                            <rect key="frame" x="0.0" y="40.5" width="382" height="34.5"/>
-                                                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Artist" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-xB-0q4" userLabel="Song Artist">
-                                                            <rect key="frame" x="0.0" y="75" width="382" height="29"/>
-                                                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="20"/>
-                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapper" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhE-rW-i3K">
-                                                            <rect key="frame" x="0.0" y="104" width="382" height="29"/>
-                                                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="20"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        </view>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="vIt-ja-Hcp">
+                                                            <rect key="frame" x="108" y="0.0" width="258" height="140"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHL-Au-ZVS">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="258" height="42.5"/>
+                                                                    <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="28"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Sub Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rM-97-Fxx">
+                                                                    <rect key="frame" x="0.0" y="42.5" width="258" height="36.5"/>
+                                                                    <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="24"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Artist" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Uo-xB-0q4" userLabel="Song Artist">
+                                                                    <rect key="frame" x="0.0" y="79" width="258" height="30.5"/>
+                                                                    <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="20"/>
+                                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mapper" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhE-rW-i3K">
+                                                                    <rect key="frame" x="0.0" y="109.5" width="258" height="30.5"/>
+                                                                    <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="20"/>
+                                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
-                                        </stackView>
+                                            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="A0h-Zb-TeS" secondAttribute="bottom" constant="8" id="1La-kz-xGF"/>
+                                                <constraint firstItem="A0h-Zb-TeS" firstAttribute="top" secondItem="mHp-Rb-F76" secondAttribute="top" constant="8" id="Hsk-ae-fPd"/>
+                                                <constraint firstAttribute="trailing" secondItem="A0h-Zb-TeS" secondAttribute="trailing" constant="8" id="PpK-tZ-4nx"/>
+                                                <constraint firstItem="A0h-Zb-TeS" firstAttribute="leading" secondItem="mHp-Rb-F76" secondAttribute="leading" constant="8" id="zf9-CH-fig"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="16"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Hb-yK-9hQ">
-                                            <rect key="frame" x="0.0" y="357" width="382" height="283"/>
+                                            <rect key="frame" x="0.0" y="172" width="382" height="283"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="2OJ-U3-KTN">
                                                     <rect key="frame" x="8" y="8" width="366" height="267"/>
@@ -352,6 +375,7 @@
                 <constraint firstItem="tTS-kz-Sx5" firstAttribute="leading" secondItem="yoP-fL-WRJ" secondAttribute="leading" id="E76-YS-GzG"/>
                 <constraint firstAttribute="bottom" secondItem="tTS-kz-Sx5" secondAttribute="bottom" id="Gjc-ro-pfL"/>
                 <constraint firstAttribute="trailing" secondItem="i7C-H9-1fB" secondAttribute="trailing" id="MGQ-8u-LVC"/>
+                <constraint firstItem="zrt-T7-UHl" firstAttribute="leading" secondItem="yoP-fL-WRJ" secondAttribute="leading" constant="16" id="Q6D-HW-tV3"/>
                 <constraint firstAttribute="trailing" secondItem="ZwA-4W-W90" secondAttribute="trailing" id="VWz-hB-SEc"/>
                 <constraint firstItem="ZwA-4W-W90" firstAttribute="top" secondItem="uvU-y6-4bz" secondAttribute="top" id="YBI-zD-D2p"/>
                 <constraint firstAttribute="bottom" secondItem="i7C-H9-1fB" secondAttribute="bottom" id="bU3-es-LQ4"/>

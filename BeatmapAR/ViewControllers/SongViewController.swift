@@ -45,6 +45,7 @@ final class SongViewController: UIViewController {
         let zipDataSource = ZIPBeatmapLoaderDataSource(with: filePreview.url)
         let loader = BeatmapLoader(dataSource: zipDataSource)
 
+        // TODO: Load this in a background thread....
         guard let map = try? loader.loadMap() else {
             // TODO: Show error alert and dismiss
             stackView.isHidden = true
