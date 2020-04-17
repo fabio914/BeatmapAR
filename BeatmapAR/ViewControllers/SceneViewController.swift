@@ -73,14 +73,9 @@ final class SceneViewController: UIViewController {
         self.redBlockNode = referenceNode?.childNode(withName: "Red", recursively: false)
         self.redAnyDirectionNode = referenceNode?.childNode(withName: "Red Any Direction", recursively: false)
         self.bombNode = referenceNode?.childNode(withName: "Bomb", recursively: false)
-
         referenceNode?.isHidden = true
 
-        let root = SCNNode()
-        root.position = .init(-0.375, -0.375, -0.375)
-        sceneView.scene.rootNode.addChildNode(root)
-        self.rootNode = root
-
+        buildScene()
         updateScene(for: 0)
     }
 
@@ -118,14 +113,13 @@ final class SceneViewController: UIViewController {
         }
     }
 
-    // FIXME: This is not really efficient....
-    private func updateScene(for time: TimeInterval) {
-        timeLabel.text = time.formatted
+    // FIXME: Build the scene incrementally
+    private func buildScene() {
 
-        rootNode?.enumerateChildNodes({ node, _ in node.removeFromParentNode() })
-        let mapSlice = songDifficulty.slice(for: (time - 1.0) ... (time + 9.0)) // 10 second slice
+        let rootNode = SCNNode()
+        rootNode.position = .init(-0.375, -0.375, -0.375)
 
-        for noteEvent in mapSlice.notes {
+        for noteEvent in songDifficulty.notes {
             let noteNode: SCNNode? = {
                 switch noteEvent.note {
                 case .blueBlock(.anyDirection):
@@ -159,16 +153,35 @@ final class SceneViewController: UIViewController {
             objectNode.position = .init(
                 Double(coordinates.column.rawValue) * 0.25,
                 Double(coordinates.row.rawValue) * 0.25,
-                -((noteTime - time) * distancePerSecond)
+                -(noteTime * distancePerSecond)
             )
 
             let rotation = (direction?.angle ?? 0.0) * .pi/180.0
             objectNode.eulerAngles.z = rotation
 
-            rootNode?.addChildNode(objectNode)
+            objectNode.isHidden = true
+            rootNode.addChildNode(objectNode)
         }
 
-        // TODO: Draw obstacles
+        // TODO: Add obstacles
+
+        sceneView.scene.rootNode.addChildNode(rootNode)
+        self.rootNode = rootNode
+    }
+
+    private func updateScene(for time: TimeInterval) {
+        timeLabel.text = time.formatted
+        rootNode?.position.z = Float((time * distancePerSecond) - 0.375)
+
+        let visibleSeconds = 7.0 // Reduce this value to increase the fps
+        let visibleDistance = visibleSeconds * distancePerSecond
+        let visibleDistanceSquared = Float(visibleDistance * visibleDistance)
+
+        // This logic won't work well for walls....
+        guard let cameraPosition = sceneView.pointOfView?.worldPosition else { return }
+
+        // Consider using a different data structure to speed this up...
+        rootNode?.childNodes.forEach({ $0.isHidden = (cameraPosition - $0.worldPosition).distanceSquared > visibleDistanceSquared })
     }
 
     // MARK: - Actions
@@ -203,5 +216,16 @@ extension SceneViewController: ARSCNViewDelegate {
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
+    }
+}
+
+extension SCNVector3 {
+
+    var distanceSquared: Float {
+        x * x + y * y + z * z
+    }
+
+    static func - (lhs: SCNVector3, rhs: SCNVector3) -> SCNVector3 {
+        .init(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z)
     }
 }
