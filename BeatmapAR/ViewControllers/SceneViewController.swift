@@ -63,7 +63,7 @@ final class SceneViewController: UIViewController {
         light.type = .omni
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = .init(0, 2, -1)
+        lightNode.position = .init(0, 2, 1)
         sceneView.pointOfView?.addChildNode(lightNode)
         self.lightSource = light
 
@@ -173,6 +173,7 @@ final class SceneViewController: UIViewController {
         timeLabel.text = time.formatted
         rootNode?.position.z = Float((time * distancePerSecond) - 0.375)
 
+        // Consider using `vibibleBeats` (and converting to `visibleSeconds`)
         let visibleSeconds = 7.0 // Reduce this value to increase the fps
         let visibleDistance = visibleSeconds * distancePerSecond
         let visibleDistanceSquared = Float(visibleDistance * visibleDistance)
@@ -182,6 +183,8 @@ final class SceneViewController: UIViewController {
 
         // Consider using a different data structure to speed this up...
         rootNode?.childNodes.forEach({ $0.isHidden = (cameraPosition - $0.worldPosition).distanceSquared > visibleDistanceSquared })
+
+        // Consider using https://developer.apple.com/documentation/scenekit/scnscenerenderer/1522647-isnode
     }
 
     // MARK: - Actions

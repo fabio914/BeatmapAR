@@ -32,7 +32,7 @@ final class TestSceneViewController: UIViewController {
         light.type = .omni
         let lightNode = SCNNode()
         lightNode.light = light
-        lightNode.position = .init(0, 2, -1)
+        lightNode.position = .init(0, 2, 1)
         sceneView.pointOfView?.addChildNode(lightNode)
         self.lightSource = light
     }
