@@ -24,11 +24,10 @@ final class SongViewController: UIViewController {
     @IBOutlet private weak var bombsLabel: UILabel!
     @IBOutlet private weak var playViewContainer: UIView!
 
-
     private let filePreview: BeatmapFilePreview
 
     private var map: BeatmapSong?
-    private var duration: TimeInterval = 0.0
+    private var duration: TimeInterval?
 
     private var standardDifficulties: [BeatmapSongDifficulty]? {
         map?.standardDifficulties
@@ -103,7 +102,7 @@ final class SongViewController: UIViewController {
         // FIXME: add/substract song offset
         self.duration = audioPlayer.duration()
         bpmLabel.text = "\(preview.beatsPerMinute)"
-        durationLabel.text = duration.formatted
+        durationLabel.text = duration?.formatted
 
         playViewContainer.layer.borderColor = UIColor.white.cgColor
         playViewContainer.layer.borderWidth = 4
@@ -136,7 +135,8 @@ final class SongViewController: UIViewController {
 
     // MARK: - Helper
 
-    func updateSongInformation(for difficulty: BeatmapSongDifficulty) {
+    private func updateSongInformation(for difficulty: BeatmapSongDifficulty) {
+        guard let duration = duration else { return }
         let notesPerSecond = (duration > 0.0) ? (Double(difficulty.noteCount)/duration):0.0
         notesPerSecondLabel.text = String(format: "%.02f", notesPerSecond)
         notesLabel.text = "\(difficulty.noteCount)"
@@ -146,7 +146,7 @@ final class SongViewController: UIViewController {
 
     // MARK: - Actions
 
-    @IBAction func segmentedControlChanged(_ sender: Any) {
+    @IBAction private func segmentedControlChanged(_ sender: Any) {
         let index = segmentedControl.selectedSegmentIndex
         selectedDifficulty = standardDifficulties?[index]
     }
@@ -157,5 +157,21 @@ final class SongViewController: UIViewController {
 
     @IBAction private func playAction(_ sender: Any) {
         // TODO: Navigate to AR scene
+        guard let presentingViewController = presentingViewController,
+            let duration = duration,
+            let selectedDifficulty = selectedDifficulty
+        else {
+            return
+        }
+
+        dismiss(animated: true, completion: {
+            let sceneViewController = SceneViewController(
+                duration: duration,
+                songDifficulty: selectedDifficulty
+            )
+
+            sceneViewController.modalPresentationStyle = .overFullScreen
+            presentingViewController.present(sceneViewController, animated: true, completion: nil)
+        })
     }
 }
