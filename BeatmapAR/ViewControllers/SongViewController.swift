@@ -156,7 +156,6 @@ final class SongViewController: UIViewController {
     }
 
     @IBAction private func playAction(_ sender: Any) {
-        // TODO: Navigate to AR scene
         guard let presentingViewController = presentingViewController,
             let duration = duration,
             let selectedDifficulty = selectedDifficulty
@@ -167,6 +166,7 @@ final class SongViewController: UIViewController {
         dismiss(animated: true, completion: {
             let sceneViewController = SceneViewController(
                 duration: duration,
+                bpm: self.filePreview.preview.beatsPerMinute,
                 songDifficulty: selectedDifficulty
             )
 

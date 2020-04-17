@@ -8,22 +8,22 @@ public enum BeatmapDifficulty {
     case expertPlus
 }
 
-public enum BeatmapColumn {
-    case leftmost
-    case left
-    case right
-    case rightmost
+public enum BeatmapColumn: Int {
+    case leftmost = 0
+    case left = 1
+    case right = 2
+    case rightmost = 3
 }
 
-public enum BeatmapRow {
-    case bottom
-    case middle
-    case top
+public enum BeatmapRow: Int {
+    case bottom = 0
+    case middle = 1
+    case top = 2
 }
 
 public struct BeatmapCoordinates {
-    let row: BeatmapRow
-    let column: BeatmapColumn
+    public let row: BeatmapRow
+    public let column: BeatmapColumn
 }
 
 public enum BeatmapDirection {
@@ -36,6 +36,29 @@ public enum BeatmapDirection {
     case topRightToBottomLeft
     case topLeftToBottomRight
     case anyDirection
+
+    public var angle: Float {
+        switch self {
+        case .bottomToTop:
+            return 180.0
+        case .topToBottom:
+            return 0.0
+        case .rightToLeft:
+            return -90.0
+        case .leftToRight:
+            return 90.0
+        case .bottomRightToTopLeft:
+            return -135.0
+        case .bottomLeftToTopRight:
+            return 135.0
+        case .topRightToBottomLeft:
+            return -45.0
+        case .topLeftToBottomRight:
+            return 45.0
+        default:
+            return 0.0
+        }
+    }
 }
 
 public enum BeatmapNote {
@@ -51,6 +74,7 @@ public enum BeatmapNote {
 public struct BeatmapNoteEvent {
     public let time: TimeInterval
     public let note: BeatmapNote
+    public let coordinates: BeatmapCoordinates
 
     public func isContainedBy(_ range: ClosedRange<TimeInterval>) -> Bool {
         range.contains(time)

@@ -111,7 +111,8 @@ internal struct BeatmapDifficultyModel: Decodable {
                     case .blueBlock:
                         return .blueBlock(cutDirection.direction)
                     }
-                }()
+                }(),
+                coordinates: .init(row: lineLayer.row, column: lineIndex.column)
             )
         }
     }

@@ -5,6 +5,7 @@ import ARKit
 final class TestSceneViewController: UIViewController {
 
     @IBOutlet private var sceneView: ARSCNView!
+    private var lightSource: SCNLight?
 
     override var prefersStatusBarHidden: Bool {
         true
@@ -25,7 +26,15 @@ final class TestSceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.delegate = self
-        sceneView.scene = SCNScene(named: "art.scnassets/Test.scn")!
+        sceneView.scene = SCNScene(named: "art.scnassets/Scene.scn")!
+
+        let light = SCNLight()
+        light.type = .omni
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = .init(0, 2, -1)
+        sceneView.pointOfView?.addChildNode(lightNode)
+        self.lightSource = light
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,9 +64,8 @@ final class TestSceneViewController: UIViewController {
             let ambientIntensity = lightEstimate.ambientIntensity
             let ambientColorTemperature = lightEstimate.ambientColorTemperature
 
-            guard let light = self.sceneView.scene.rootNode.childNodes.first?.light else { return }
-            light.intensity = ambientIntensity
-            light.temperature = ambientColorTemperature
+            self.lightSource?.intensity = ambientIntensity
+            self.lightSource?.temperature = ambientColorTemperature
         }
     }
 

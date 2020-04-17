@@ -15,6 +15,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SceneViewController" customModule="BeatmapAR" customModuleProvider="target">
             <connections>
                 <outlet property="sceneView" destination="CCF-OX-R7M" id="NZC-Fj-aH3"/>
+                <outlet property="timeLabel" destination="WdB-qi-QAE" id="LBR-BR-dPa"/>
                 <outlet property="view" destination="iN0-l3-epB" id="S3j-mS-D0B"/>
             </connections>
         </placeholder>
@@ -66,21 +67,41 @@
                         <constraint firstAttribute="bottom" secondItem="h8g-z7-Vr9" secondAttribute="bottom" id="G3y-xb-AHN"/>
                     </constraints>
                 </view>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="p8Y-zu-Fqt">
+                    <rect key="frame" x="30" y="800" width="288" height="31"/>
+                    <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="maximumTrackTintColor" red="0.0" green="0.094117647060000004" blue="0.20000000000000001" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="sliderValueChanged:" destination="-1" eventType="valueChanged" id="o9K-I5-Ezs"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X:XX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdB-qi-QAE">
+                    <rect key="frame" x="348" y="796" width="34" height="38"/>
+                    <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="26"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.094117647060000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="WdB-qi-QAE" firstAttribute="leading" secondItem="p8Y-zu-Fqt" secondAttribute="trailing" constant="32" id="7V5-4c-ZUn"/>
                 <constraint firstItem="Kyx-lY-TED" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Arl-3F-Cnv"/>
                 <constraint firstAttribute="trailing" secondItem="Kyx-lY-TED" secondAttribute="trailing" id="CM0-u8-DDx"/>
                 <constraint firstItem="CCF-OX-R7M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ESL-6g-Bm3"/>
                 <constraint firstAttribute="bottom" secondItem="CCF-OX-R7M" secondAttribute="bottom" id="EeQ-5e-cBj"/>
                 <constraint firstItem="CCF-OX-R7M" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HX9-8d-tbW"/>
                 <constraint firstItem="h8g-z7-Vr9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="JNO-vo-h5U"/>
+                <constraint firstItem="p8Y-zu-Fqt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="PWE-lC-cWd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="p8Y-zu-Fqt" secondAttribute="bottom" constant="32" id="RKB-XK-4ZF"/>
                 <constraint firstAttribute="trailing" secondItem="CCF-OX-R7M" secondAttribute="trailing" id="Sd8-ab-ubB"/>
+                <constraint firstItem="WdB-qi-QAE" firstAttribute="centerY" secondItem="p8Y-zu-Fqt" secondAttribute="centerY" id="Xdc-87-Qp8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WdB-qi-QAE" secondAttribute="trailing" constant="32" id="XxK-oI-TYT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="Kyx-lY-TED" secondAttribute="bottom" constant="-44" id="ZJO-fB-FEj"/>
                 <constraint firstItem="Kyx-lY-TED" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gGt-eX-CiC"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="125"/>
+            <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
         </view>
     </objects>
 </document>
