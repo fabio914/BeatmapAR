@@ -60,7 +60,7 @@ final class SceneViewController: UIViewController {
         }
     }
 
-    private var isPaused: Bool = false {
+    private var isPaused: Bool = true {
         didSet {
             if isPaused {
                 pauseLabel.text = "PLAY"
@@ -129,7 +129,6 @@ final class SceneViewController: UIViewController {
 
         if first {
             updateScene(for: 0, forceSyncAudio: true)
-            audioPlayer.play()
             rootNode?.isHidden = false
             first = false
         }
@@ -303,9 +302,10 @@ extension SceneViewController: ARSCNViewDelegate {
     }
 
 //    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-//        let node = SCNNode()
+//    }
 //
-//        return node
+//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
 //    }
 
     func session(_ session: ARSession, didFailWithError error: Error) {

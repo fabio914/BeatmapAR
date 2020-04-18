@@ -67,7 +67,7 @@
                                     </constraints>
                                 </view>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="p8Y-zu-Fqt">
-                                    <rect key="frame" x="53.5" y="0.0" width="191.5" height="45"/>
+                                    <rect key="frame" x="53.5" y="0.0" width="195.5" height="45"/>
                                     <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,16 +76,16 @@
                                     </connections>
                                 </slider>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X:XX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdB-qi-QAE">
-                                    <rect key="frame" x="259" y="0.0" width="33.5" height="44"/>
+                                    <rect key="frame" x="263" y="0.0" width="33.5" height="44"/>
                                     <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="26"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYI-Ef-zvf">
-                                    <rect key="frame" x="308.5" y="0.0" width="41.5" height="44"/>
+                                    <rect key="frame" x="312.5" y="0.0" width="37.5" height="44"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAUSE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haW-8u-1Mf">
-                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="44"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haW-8u-1Mf">
+                                            <rect key="frame" x="0.0" y="0.0" width="37.5" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="IkP-bc-RFO"/>
                                             </constraints>
@@ -94,7 +94,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXD-lc-fPG">
-                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="37.5" height="44"/>
                                             <connections>
                                                 <action selector="pauseAction:" destination="-1" eventType="touchUpInside" id="Ics-SW-6AI"/>
                                             </connections>
