@@ -57,6 +57,7 @@ open Beatmap.xcodeproj/
  - [ ] Optimize how the AR scene gets built and build the map incrementally instead of all at once;
  - [ ] Consider reducing the number of polygons in the block/cube model;
  - [ ] Add an internal web browser to allow the user to download songs from within the app itself;
+ - [ ] Add support for other game modes (e.g. 90º, 360º, one saber, etc);
 
 ## Contributors
 
@@ -68,7 +69,7 @@ This project depends on [weichsel/ZIPFoundation](https://github.com/weichsel/ZIP
 
 Its beatmap definition is based on the [lolPants/beatmap-schemas](https://github.com/lolPants/beatmap-schemas).
 
-It also uses the [Beat Saber Cube](https://www.thingiverse.com/thing:3387776) model created by [Jordan Johston](https://www.thingiverse.com/Godsblade/about).
+It also uses the [Beat Saber Cube](https://www.thingiverse.com/thing:3387776) model created by [Jordan Johston](https://www.thingiverse.com/Godsblade/about) and the [Teko](https://fonts.google.com/specimen/Teko) font.
 
 ![Blocks](Images/blocks.png)
 

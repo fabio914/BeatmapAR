@@ -28,6 +28,7 @@ final class SceneViewController: UIViewController {
     private var redBlockNode: SCNNode?
     private var redAnyDirectionNode: SCNNode?
     private var bombNode: SCNNode?
+    private var lineNode: SCNNode?
 
     // MARK: - Scene objects
     private var lightSource: SCNLight?
@@ -166,6 +167,7 @@ final class SceneViewController: UIViewController {
         self.redBlockNode = referenceNode?.childNode(withName: "Red", recursively: false)
         self.redAnyDirectionNode = referenceNode?.childNode(withName: "Red Any Direction", recursively: false)
         self.bombNode = referenceNode?.childNode(withName: "Bomb", recursively: false)
+        self.lineNode = referenceNode?.childNode(withName: "Line", recursively: false)
         referenceNode?.isHidden = true
     }
 
@@ -224,6 +226,11 @@ final class SceneViewController: UIViewController {
         rootNode.isHidden = true
         sceneView.scene.rootNode.addChildNode(rootNode)
         self.rootNode = rootNode
+
+        if let lineNode = lineNode?.clone() {
+            lineNode.position = .init(0, rootOriginPosition.y - 0.125, rootOriginPosition.z)
+            sceneView.scene.rootNode.addChildNode(lineNode)
+        }
     }
 
     private func updateScene(for time: TimeInterval, forceSyncAudio: Bool = false) {
