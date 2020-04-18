@@ -4,7 +4,7 @@
 
 Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 
-This is a very early prototype! It's not optimized and a lot of improvements can be made, use at own risk!
+This is a very early prototype! It's not optimized and a lot of improvements can be made, use at your own risk!
 
 ## Requirements
 
@@ -69,7 +69,7 @@ This project depends on [weichsel/ZIPFoundation](https://github.com/weichsel/ZIP
 
 Its beatmap definition is based on the [lolPants/beatmap-schemas](https://github.com/lolPants/beatmap-schemas).
 
-It also uses the [Beat Saber Cube](https://www.thingiverse.com/thing:3387776) model created by [Jordan Johston](https://www.thingiverse.com/Godsblade/about) and the [Teko](https://fonts.google.com/specimen/Teko) font.
+It also uses the [Beat Saber Cube](https://www.thingiverse.com/thing:3387776) model created by [Jordan Johnston](https://www.thingiverse.com/Godsblade/about) and the [Teko](https://fonts.google.com/specimen/Teko) font.
 
 ![Blocks](Images/blocks.png)
 

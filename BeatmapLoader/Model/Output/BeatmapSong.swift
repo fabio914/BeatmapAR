@@ -6,6 +6,21 @@ public enum BeatmapDifficulty {
     case hard
     case expert
     case expertPlus
+
+    public var displayName: String {
+        switch self {
+        case .easy:
+            return "Easy"
+        case .normal:
+            return "Normal"
+        case .hard:
+            return "Hard"
+        case .expert:
+            return "Expert"
+        case .expertPlus:
+            return "Expert+"
+        }
+    }
 }
 
 public enum BeatmapColumn: Int {

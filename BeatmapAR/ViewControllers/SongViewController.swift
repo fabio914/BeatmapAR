@@ -130,7 +130,7 @@ final class SongViewController: UIViewController {
 
         for i in 0 ..< map.standardDifficulties.count {
             let difficulty = map.standardDifficulties[i]
-            segmentedControl.insertSegment(withTitle: difficulty.name, at: i, animated: false)
+            segmentedControl.insertSegment(withTitle: difficulty.difficulty.displayName, at: i, animated: false)
         }
 
         segmentedControl.selectedSegmentIndex = 0
