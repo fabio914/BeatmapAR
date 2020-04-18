@@ -69,7 +69,6 @@ open Beatmap.xcodeproj/
 
 ## TO-DOs
 
- - [ ] Start rendering walls;
  - [ ] Optimize how the AR scene gets built and build the map incrementally instead of all at once;
  - [ ] Consider reducing the number of polygons in the block/cube model;
  - [ ] Add an internal web browser to allow the user to download songs from within the app itself;
