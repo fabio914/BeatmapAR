@@ -14,9 +14,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SceneViewController" customModule="BeatmapAR" customModuleProvider="target">
             <connections>
+                <outlet property="pauseLabel" destination="haW-8u-1Mf" id="JOu-hj-SnY"/>
                 <outlet property="sceneView" destination="CCF-OX-R7M" id="NZC-Fj-aH3"/>
                 <outlet property="slider" destination="p8Y-zu-Fqt" id="TdK-xB-OEh"/>
-                <outlet property="timeLabel" destination="WdB-qi-QAE" id="LBR-BR-dPa"/>
+                <outlet property="timeLabel" destination="WdB-qi-QAE" id="18S-ik-z1I"/>
                 <outlet property="view" destination="iN0-l3-epB" id="S3j-mS-D0B"/>
             </connections>
         </placeholder>
@@ -66,7 +67,7 @@
                                     </constraints>
                                 </view>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="p8Y-zu-Fqt">
-                                    <rect key="frame" x="53.5" y="0.0" width="249" height="45"/>
+                                    <rect key="frame" x="53.5" y="0.0" width="191.5" height="45"/>
                                     <color key="minimumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -75,11 +76,42 @@
                                     </connections>
                                 </slider>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X:XX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdB-qi-QAE">
-                                    <rect key="frame" x="316.5" y="0.0" width="33.5" height="44"/>
+                                    <rect key="frame" x="259" y="0.0" width="33.5" height="44"/>
                                     <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="26"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYI-Ef-zvf">
+                                    <rect key="frame" x="308.5" y="0.0" width="41.5" height="44"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAUSE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haW-8u-1Mf">
+                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="IkP-bc-RFO"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Teko-Regular" family="Teko" pointSize="22"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXD-lc-fPG">
+                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="44"/>
+                                            <connections>
+                                                <action selector="pauseAction:" destination="-1" eventType="touchUpInside" id="Ics-SW-6AI"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="haW-8u-1Mf" firstAttribute="top" secondItem="EYI-Ef-zvf" secondAttribute="top" id="DtB-3R-KdV"/>
+                                        <constraint firstItem="oXD-lc-fPG" firstAttribute="leading" secondItem="EYI-Ef-zvf" secondAttribute="leading" id="RWO-iq-JqK"/>
+                                        <constraint firstAttribute="trailing" secondItem="oXD-lc-fPG" secondAttribute="trailing" id="aQC-57-oTC"/>
+                                        <constraint firstItem="haW-8u-1Mf" firstAttribute="leading" secondItem="EYI-Ef-zvf" secondAttribute="leading" id="c2b-23-3eM"/>
+                                        <constraint firstAttribute="trailing" secondItem="haW-8u-1Mf" secondAttribute="trailing" id="cVe-Hs-NVz"/>
+                                        <constraint firstItem="oXD-lc-fPG" firstAttribute="top" secondItem="EYI-Ef-zvf" secondAttribute="top" id="dhg-MH-uFh"/>
+                                        <constraint firstAttribute="bottom" secondItem="haW-8u-1Mf" secondAttribute="bottom" id="hOg-TP-g02"/>
+                                        <constraint firstAttribute="bottom" secondItem="oXD-lc-fPG" secondAttribute="bottom" id="ilh-BC-hag"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                         </stackView>
                     </subviews>

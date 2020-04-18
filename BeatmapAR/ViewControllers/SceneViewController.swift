@@ -7,13 +7,21 @@ import BeatmapLoader
 
 final class SceneViewController: UIViewController {
 
+    override var prefersStatusBarHidden: Bool {
+        true
+    }
+
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        true
+    }
+
+    // MARK: - Outlets
     @IBOutlet private var sceneView: ARSCNView!
     @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet weak var pauseLabel: UILabel!
     @IBOutlet private weak var slider: UISlider!
 
-    private var lightSource: SCNLight?
-
-    // MARK: - References
+    // MARK: - Scene references
     private var referenceNode: SCNNode?
     private var blueBlockNode: SCNNode?
     private var blueAnyDirectionNode: SCNNode?
@@ -21,30 +29,48 @@ final class SceneViewController: UIViewController {
     private var redAnyDirectionNode: SCNNode?
     private var bombNode: SCNNode?
 
+    // MARK: - Scene objects
+    private var lightSource: SCNLight?
     private var rootNode: SCNNode?
-    private let rootOriginPosition = SCNVector3(-0.375, -0.375, -1.0)
 
+    // MARK: - Parameters
+    private let rootOriginPosition = SCNVector3(-0.375, -0.375, -1.0)
+    private let lightPosition = SCNVector3(0, 2, 1)
+    private let visibleSeconds = 1.5
+    private let distancePerBeat = 4.0
+    private let numberOfUpdatesBetweenAudioSyncs = 30
+
+    // MARK: - Constants
     private let duration: TimeInterval
     private let songDifficulty: BeatmapSongDifficulty
     private let distancePerSecond: Double
     private let audioPlayer: APAudioPlayer
 
+    // MARK: - Variables
     private var first = true
-    var lastPauseTimestamp: TimeInterval?
+    private var initialSceneTimestamp: TimeInterval?
+    private var audioSyncCount = 0
 
     private var timeSetByUser: TimeInterval = 0 {
         didSet {
-            lastPauseTimestamp = nil
-            updateScene(for: timeSetByUser)
+            initialSceneTimestamp = nil
+            isPaused = true
+            updateScene(for: timeSetByUser, forceSyncAudio: true)
         }
     }
 
-    override var prefersStatusBarHidden: Bool {
-        true
-    }
-
-    override var prefersHomeIndicatorAutoHidden: Bool {
-        true
+    private var isPaused: Bool = false {
+        didSet {
+            if isPaused {
+                pauseLabel.text = "PLAY"
+                audioPlayer.pause()
+            } else {
+                pauseLabel.text = "PAUSE"
+                // Forces an audio sync on the next frame
+                audioSyncCount = numberOfUpdatesBetweenAudioSyncs
+                audioPlayer.play()
+            }
+        }
     }
 
     init(
@@ -57,7 +83,6 @@ final class SceneViewController: UIViewController {
         self.songDifficulty = songDifficulty
         self.audioPlayer = audioPlayer
 
-        let distancePerBeat = 5.0
         let beatsPerSecond = Double(bpm)/60.0
         self.distancePerSecond =  distancePerBeat * beatsPerSecond
 
@@ -70,27 +95,7 @@ final class SceneViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sceneView.delegate = self
-        sceneView.scene = SCNScene(named: "art.scnassets/Scene.scn")!
-
-        let light = SCNLight()
-        light.type = .omni
-        let lightNode = SCNNode()
-        lightNode.light = light
-        lightNode.position = .init(0, 2, 1)
-        sceneView.pointOfView?.addChildNode(lightNode)
-        self.lightSource = light
-
-        self.referenceNode = sceneView.scene.rootNode.childNode(withName: "Reference", recursively: false)
-        self.blueBlockNode = referenceNode?.childNode(withName: "Blue", recursively: false)
-        self.blueAnyDirectionNode = referenceNode?.childNode(withName: "Blue Any Direction", recursively: false)
-        self.redBlockNode = referenceNode?.childNode(withName: "Red", recursively: false)
-        self.redAnyDirectionNode = referenceNode?.childNode(withName: "Red Any Direction", recursively: false)
-        self.bombNode = referenceNode?.childNode(withName: "Bomb", recursively: false)
-        referenceNode?.isHidden = true
-
         buildScene()
-        updateScene(for: 0)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -117,8 +122,9 @@ final class SceneViewController: UIViewController {
         super.viewDidAppear(animated)
 
         if first {
-            audioPlayer.position = 0
+            updateScene(for: 0, forceSyncAudio: true)
             audioPlayer.play()
+            rootNode?.isHidden = false
             first = false
         }
     }
@@ -137,8 +143,34 @@ final class SceneViewController: UIViewController {
         }
     }
 
-    // FIXME: Build the scene incrementally
     private func buildScene() {
+        sceneView.delegate = self
+        sceneView.scene = SCNScene(named: "art.scnassets/Scene.scn")!
+
+        let light = SCNLight()
+        light.type = .omni
+        let lightNode = SCNNode()
+        lightNode.light = light
+        lightNode.position = lightPosition
+        sceneView.pointOfView?.addChildNode(lightNode)
+        self.lightSource = light
+
+        loadSceneReferences()
+        buildMap()
+    }
+
+    private func loadSceneReferences() {
+        self.referenceNode = sceneView.scene.rootNode.childNode(withName: "Reference", recursively: false)
+        self.blueBlockNode = referenceNode?.childNode(withName: "Blue", recursively: false)
+        self.blueAnyDirectionNode = referenceNode?.childNode(withName: "Blue Any Direction", recursively: false)
+        self.redBlockNode = referenceNode?.childNode(withName: "Red", recursively: false)
+        self.redAnyDirectionNode = referenceNode?.childNode(withName: "Red Any Direction", recursively: false)
+        self.bombNode = referenceNode?.childNode(withName: "Bomb", recursively: false)
+        referenceNode?.isHidden = true
+    }
+
+    // Consider building the map incrementally
+    private func buildMap() {
 
         let rootNode = SCNNode()
         rootNode.position = rootOriginPosition
@@ -189,20 +221,25 @@ final class SceneViewController: UIViewController {
 
         // TODO: Add obstacles
 
+        rootNode.isHidden = true
         sceneView.scene.rootNode.addChildNode(rootNode)
         self.rootNode = rootNode
     }
 
-    private func updateScene(for time: TimeInterval) {
+    private func updateScene(for time: TimeInterval, forceSyncAudio: Bool = false) {
         let time = min(time, duration)
         let relativePosition = (time/duration)
         timeLabel.text = time.formatted
         slider.value = Float(relativePosition)
         rootNode?.position.z = Float(time * distancePerSecond) + rootOriginPosition.z
-        audioPlayer.position = CGFloat(relativePosition)
 
-        // Consider using `vibibleBeats` (and converting to `visibleSeconds`)
-        let visibleSeconds = 4.0 // Reduce this value to increase the fps
+        audioSyncCount += 1
+
+        if forceSyncAudio || (audioSyncCount >= numberOfUpdatesBetweenAudioSyncs) {
+            audioPlayer.position = CGFloat(relativePosition)
+            audioSyncCount = 0
+        }
+
         let visibleDistance = visibleSeconds * distancePerSecond
         let visibleDistanceSquared = Float(visibleDistance * visibleDistance)
 
@@ -214,15 +251,22 @@ final class SceneViewController: UIViewController {
 
         // Consider using https://developer.apple.com/documentation/scenekit/scnscenerenderer/1522647-isnode
     }
+}
 
-    // MARK: - Actions
+// MARK: - Actions
 
-    @IBAction func closeAction(_ sender: Any) {
+extension SceneViewController {
+
+    @IBAction private func closeAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func sliderValueChanged(_ sender: UISlider) {
+    @IBAction private func sliderValueChanged(_ sender: UISlider) {
         timeSetByUser = Double(sender.value) * duration
+    }
+
+    @IBAction private func pauseAction(_ sender: Any) {
+        isPaused = !isPaused
     }
 }
 
@@ -233,13 +277,15 @@ extension SceneViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         updateLightNodesLightEstimation()
 
-        if lastPauseTimestamp == nil {
-            lastPauseTimestamp = time - timeSetByUser
+        guard !isPaused else { return }
+
+        if initialSceneTimestamp == nil {
+            initialSceneTimestamp = time - timeSetByUser
         }
 
         DispatchQueue.main.async {
-            guard let lastPauseTimestamp = self.lastPauseTimestamp else { return }
-            self.updateScene(for: time - lastPauseTimestamp)
+            guard let initialSceneTimestamp = self.initialSceneTimestamp else { return }
+            self.updateScene(for: time - initialSceneTimestamp)
         }
     }
 
@@ -256,16 +302,5 @@ extension SceneViewController: ARSCNViewDelegate {
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
-    }
-}
-
-extension SCNVector3 {
-
-    var distanceSquared: Float {
-        x * x + y * y + z * z
-    }
-
-    static func - (lhs: SCNVector3, rhs: SCNVector3) -> SCNVector3 {
-        .init(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z)
     }
 }
