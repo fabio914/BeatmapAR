@@ -28,6 +28,7 @@ final class SceneViewController: UIViewController {
     private var redBlockNode: SCNNode?
     private var redAnyDirectionNode: SCNNode?
     private var bombNode: SCNNode?
+    private var wallNode: SCNNode?
     private var lineNode: SCNNode?
 
     // MARK: - Scene objects
@@ -171,6 +172,7 @@ final class SceneViewController: UIViewController {
         self.redBlockNode = referenceNode?.childNode(withName: "Red", recursively: false)
         self.redAnyDirectionNode = referenceNode?.childNode(withName: "Red Any Direction", recursively: false)
         self.bombNode = referenceNode?.childNode(withName: "Bomb", recursively: false)
+        self.wallNode = referenceNode?.childNode(withName: "Wall", recursively: false)
         self.lineNode = referenceNode?.childNode(withName: "Line", recursively: false)
         referenceNode?.isHidden = true
     }
