@@ -34,6 +34,8 @@ final class SceneViewController: UIViewController {
     // MARK: - Scene objects
     private var lightSource: SCNLight?
     private var rootNode: SCNNode?
+    private var notesNode: SCNNode?
+    private var wallsNode: SCNNode?
 
     // MARK: - Parameters
     private let rootOriginPosition = SCNVector3(-0.375, -0.25, -1.0)
@@ -183,8 +185,10 @@ final class SceneViewController: UIViewController {
         let rootNode = SCNNode()
         rootNode.position = rootOriginPosition
 
+        let notesNode = SCNNode()
+
         for noteEvent in songDifficulty.notes {
-            let noteNode: SCNNode? = {
+            let baseNode: SCNNode? = {
                 switch noteEvent.note {
                 case .blueBlock(.anyDirection):
                     return blueAnyDirectionNode?.clone()
@@ -199,35 +203,25 @@ final class SceneViewController: UIViewController {
                 }
             }()
 
-            let direction: BeatmapDirection? = {
-                switch noteEvent.note {
-                case .blueBlock(let direction):
-                    return direction
-                case .redBlock(let direction):
-                    return direction
-                default:
-                    return nil
-                }
-            }()
-
-            guard let objectNode = noteNode else { continue }
-            let coordinates = noteEvent.coordinates
-            let noteTime = noteEvent.time
-
-            objectNode.position = .init(
-                Double(coordinates.column.rawValue) * 0.25,
-                Double(coordinates.row.rawValue) * 0.25,
-                -(noteTime * distancePerSecond)
+            let noteNode = NoteEventNode(
+                noteEvent: noteEvent,
+                distancePerSecond: distancePerSecond,
+                child: baseNode
             )
 
-            let rotation = (direction?.angle ?? 0.0) * .pi/180.0
-            objectNode.eulerAngles.z = rotation
-
-            objectNode.isHidden = true
-            rootNode.addChildNode(objectNode)
+            noteNode.isHidden = true
+            notesNode.addChildNode(noteNode)
         }
 
+        rootNode.addChildNode(notesNode)
+        self.notesNode = notesNode
+
+        let wallsNode = SCNNode()
+
         // TODO: Add obstacles
+
+        rootNode.addChildNode(wallsNode)
+        self.wallsNode = wallsNode
 
         rootNode.isHidden = true
         sceneView.scene.rootNode.addChildNode(rootNode)
@@ -254,16 +248,17 @@ final class SceneViewController: UIViewController {
             audioSyncCount = 0
         }
 
-        let visibleDistance = visibleSeconds * distancePerSecond
-        let visibleDistanceSquared = Float(visibleDistance * visibleDistance)
+        let visibleRange = (time - visibleSeconds) ... (time + visibleSeconds)
 
-        // This logic won't work well for walls....
-        guard let cameraPosition = sceneView.pointOfView?.worldPosition else { return }
+        // Consider using a different data structure to speed this up (O(n) -> O(log(n)))
 
-        // Consider using a different data structure to speed this up...
-        rootNode?.childNodes.forEach({ $0.isHidden = (cameraPosition - $0.worldPosition).distanceSquared > visibleDistanceSquared })
+        notesNode?.childNodes
+            .compactMap({ $0 as? NoteEventNode })
+            .forEach({ $0.isHidden = !$0.noteEvent.isContainedBy(visibleRange) })
 
-        // Consider using https://developer.apple.com/documentation/scenekit/scnscenerenderer/1522647-isnode
+        wallsNode?.childNodes
+            .compactMap({ $0 as? ObstacleEventNode })
+            .forEach({ $0.isHidden = !$0.obstacleEvent.isContainedBy(visibleRange) })
     }
 }
 
@@ -317,5 +312,68 @@ extension SceneViewController: ARSCNViewDelegate {
     }
 
     func sessionInterruptionEnded(_ session: ARSession) {
+    }
+}
+
+// MARK: - Note Event node
+
+private final class NoteEventNode: SCNNode {
+    let noteEvent: BeatmapNoteEvent
+
+    init(noteEvent: BeatmapNoteEvent, distancePerSecond: Double, child: SCNNode?) {
+        self.noteEvent = noteEvent
+        super.init()
+
+        if let child = child {
+            child.position = .init()
+            self.addChildNode(child)
+        }
+
+        let direction: BeatmapDirection? = {
+            switch noteEvent.note {
+            case .blueBlock(let direction):
+                return direction
+            case .redBlock(let direction):
+                return direction
+            default:
+                return nil
+            }
+        }()
+
+        let coordinates = noteEvent.coordinates
+        let noteTime = noteEvent.time
+
+        self.position = .init(
+            Double(coordinates.column.rawValue) * 0.25,
+            Double(coordinates.row.rawValue) * 0.25,
+            -(noteTime * distancePerSecond)
+        )
+
+        let rotation = (direction?.angle ?? 0.0) * .pi/180.0
+        self.eulerAngles.z = rotation
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private final class ObstacleEventNode: SCNNode {
+    let obstacleEvent: BeatmapObstacleEvent
+
+    init(obstacleEvent: BeatmapObstacleEvent, distancePerSecond: Double, child: SCNNode?) {
+        self.obstacleEvent = obstacleEvent
+        super.init()
+
+        if let child = child {
+            child.position = .init()
+            self.addChildNode(child)
+        }
+
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
