@@ -54,8 +54,8 @@ final class SceneViewController: UIViewController {
 
     private var timeSetByUser: TimeInterval = 0 {
         didSet {
-            initialSceneTimestamp = nil
             isPaused = true
+            pausedSongTime = timeSetByUser
             updateScene(for: timeSetByUser, forceSyncAudio: true)
         }
     }
@@ -65,6 +65,8 @@ final class SceneViewController: UIViewController {
             if isPaused {
                 pauseLabel.text = "PLAY"
                 audioPlayer.pause()
+                initialSceneTimestamp = nil
+                pausedSongTime = currentSongTime
             } else {
                 pauseLabel.text = "PAUSE"
                 // Forces an audio sync on the next frame
@@ -73,6 +75,9 @@ final class SceneViewController: UIViewController {
             }
         }
     }
+
+    private var pausedSongTime: TimeInterval = 0
+    private var currentSongTime: TimeInterval = 0
 
     init(
         duration: TimeInterval,
@@ -234,6 +239,7 @@ final class SceneViewController: UIViewController {
     }
 
     private func updateScene(for time: TimeInterval, forceSyncAudio: Bool = false) {
+        self.currentSongTime = time
         let time = min(time, duration)
         let relativePosition = (time/duration)
         timeLabel.text = time.formatted
@@ -287,7 +293,7 @@ extension SceneViewController: ARSCNViewDelegate {
         guard !isPaused else { return }
 
         if initialSceneTimestamp == nil {
-            initialSceneTimestamp = time - timeSetByUser
+            initialSceneTimestamp = time - pausedSongTime
         }
 
         DispatchQueue.main.async {
