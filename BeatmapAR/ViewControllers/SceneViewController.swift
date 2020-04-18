@@ -36,7 +36,7 @@ final class SceneViewController: UIViewController {
 
     // MARK: - Parameters
     private let rootOriginPosition = SCNVector3(-0.375, -0.375, -1.0)
-    private let lightPosition = SCNVector3(0, 2, 1)
+    private let lightPosition = SCNVector3(0, 1.5, 0.5)
     private let visibleSeconds = 1.5
     private let distancePerBeat = 4.0
     private let numberOfUpdatesBetweenAudioSyncs = 30
