@@ -6,6 +6,22 @@ Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 
 This is a very early prototype! It's not optimized and a lot of improvements can be made, use at your own risk!
 
+## Screenshots
+
+![1](Images/Screenshots/1.jpg)
+
+![2](Images/Screenshots/2.jpg)
+
+![3](Images/Screenshots/3.jpg)
+
+![4](Images/Screenshots/4.jpg)
+
+![5](Images/Screenshots/5.jpg)
+
+![6](Images/Screenshots/6.jpg)
+
+![7](Images/Screenshots/7.jpg)
+
 ## Requirements
 
 - [Xcode 11.3.1](https://developer.apple.com/xcode/) or newer
@@ -58,6 +74,7 @@ open Beatmap.xcodeproj/
  - [ ] Consider reducing the number of polygons in the block/cube model;
  - [ ] Add an internal web browser to allow the user to download songs from within the app itself;
  - [ ] Add support for other game modes (e.g. 90º, 360º, one saber, etc);
+ - [ ] Use ARKit's plane detection and anchor;
 
 ## Contributors
 
