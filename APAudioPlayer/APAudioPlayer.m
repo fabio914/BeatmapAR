@@ -135,11 +135,6 @@ void CALLBACK ChannelEndedCallback(HSYNC handle, DWORD channel, DWORD data, void
     return isPlaying == BASS_ACTIVE_PLAYING;
 }
 
-- (NSTimeInterval)length {
-    QWORD len = BASS_ChannelGetLength(_channel, BASS_POS_BYTE);
-    return BASS_ChannelBytes2Seconds(_channel, len);
-}
-
 #pragma mark - Values
 
 - (NSTimeInterval)duration

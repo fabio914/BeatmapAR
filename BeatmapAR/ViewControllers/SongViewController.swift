@@ -29,6 +29,7 @@ final class SongViewController: UIViewController {
 
     private var map: BeatmapSong?
     private var duration: TimeInterval?
+    private var songURL: URL?
 
     private var standardDifficulties: [BeatmapSongDifficulty]? {
         map?.standardDifficulties
@@ -96,13 +97,13 @@ final class SongViewController: UIViewController {
             // TODO: Improve this: load from memory
             try map.song.write(to: destinationURL)
             audioPlayer.loadItem(with: destinationURL, autoPlay: true)
+            self.songURL = destinationURL
         } catch {
             // TODO: Show error message
             standardModeViewContainer.isHidden = true
             return
         }
 
-        // FIXME: add/substract song offset
         self.duration = audioPlayer.duration()
         bpmLabel.text = "\(preview.beatsPerMinute)"
         durationLabel.text = duration?.formatted
@@ -161,16 +162,20 @@ final class SongViewController: UIViewController {
     @IBAction private func playAction(_ sender: Any) {
         guard let presentingViewController = presentingViewController,
             let duration = duration,
-            let selectedDifficulty = selectedDifficulty
+            let selectedDifficulty = selectedDifficulty,
+            songURL != nil
         else {
             return
         }
+
+        audioPlayer.stop()
 
         dismiss(animated: true, completion: {
             let sceneViewController = SceneViewController(
                 duration: duration,
                 bpm: self.filePreview.preview.beatsPerMinute,
-                songDifficulty: selectedDifficulty
+                songDifficulty: selectedDifficulty,
+                audioPlayer: self.audioPlayer
             )
 
             sceneViewController.modalPresentationStyle = .fullScreen

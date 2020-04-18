@@ -2,12 +2,14 @@ import UIKit
 import SceneKit
 import ARKit
 
+import APAudioPlayer
 import BeatmapLoader
 
 final class SceneViewController: UIViewController {
 
     @IBOutlet private var sceneView: ARSCNView!
     @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet private weak var slider: UISlider!
 
     private var lightSource: SCNLight?
 
@@ -20,14 +22,20 @@ final class SceneViewController: UIViewController {
     private var bombNode: SCNNode?
 
     private var rootNode: SCNNode?
+    private let rootOriginPosition = SCNVector3(-0.375, -0.375, -1.0)
 
     private let duration: TimeInterval
     private let songDifficulty: BeatmapSongDifficulty
     private let distancePerSecond: Double
+    private let audioPlayer: APAudioPlayer
 
-    private var currentTime: TimeInterval = 0 {
+    private var first = true
+    var lastPauseTimestamp: TimeInterval?
+
+    private var timeSetByUser: TimeInterval = 0 {
         didSet {
-            updateScene(for: currentTime)
+            lastPauseTimestamp = nil
+            updateScene(for: timeSetByUser)
         }
     }
 
@@ -39,11 +47,17 @@ final class SceneViewController: UIViewController {
         true
     }
 
-    init(duration: TimeInterval, bpm: UInt, songDifficulty: BeatmapSongDifficulty) {
+    init(
+        duration: TimeInterval,
+        bpm: UInt,
+        songDifficulty: BeatmapSongDifficulty,
+        audioPlayer: APAudioPlayer
+    ) {
         self.duration = duration
         self.songDifficulty = songDifficulty
+        self.audioPlayer = audioPlayer
 
-        let distancePerBeat = 2.5
+        let distancePerBeat = 5.0
         let beatsPerSecond = Double(bpm)/60.0
         self.distancePerSecond =  distancePerBeat * beatsPerSecond
 
@@ -99,6 +113,16 @@ final class SceneViewController: UIViewController {
         sceneView.session.pause()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if first {
+            audioPlayer.position = 0
+            audioPlayer.play()
+            first = false
+        }
+    }
+
     // MARK: - Helpers
 
     private func updateLightNodesLightEstimation() {
@@ -117,7 +141,7 @@ final class SceneViewController: UIViewController {
     private func buildScene() {
 
         let rootNode = SCNNode()
-        rootNode.position = .init(-0.375, -0.375, -0.375)
+        rootNode.position = rootOriginPosition
 
         for noteEvent in songDifficulty.notes {
             let noteNode: SCNNode? = {
@@ -170,11 +194,15 @@ final class SceneViewController: UIViewController {
     }
 
     private func updateScene(for time: TimeInterval) {
+        let time = min(time, duration)
+        let relativePosition = (time/duration)
         timeLabel.text = time.formatted
-        rootNode?.position.z = Float((time * distancePerSecond) - 0.375)
+        slider.value = Float(relativePosition)
+        rootNode?.position.z = Float(time * distancePerSecond) + rootOriginPosition.z
+        audioPlayer.position = CGFloat(relativePosition)
 
         // Consider using `vibibleBeats` (and converting to `visibleSeconds`)
-        let visibleSeconds = 7.0 // Reduce this value to increase the fps
+        let visibleSeconds = 4.0 // Reduce this value to increase the fps
         let visibleDistance = visibleSeconds * distancePerSecond
         let visibleDistanceSquared = Float(visibleDistance * visibleDistance)
 
@@ -194,7 +222,7 @@ final class SceneViewController: UIViewController {
     }
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
-        currentTime = Double(sender.value) * duration
+        timeSetByUser = Double(sender.value) * duration
     }
 }
 
@@ -204,6 +232,15 @@ extension SceneViewController: ARSCNViewDelegate {
 
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         updateLightNodesLightEstimation()
+
+        if lastPauseTimestamp == nil {
+            lastPauseTimestamp = time - timeSetByUser
+        }
+
+        DispatchQueue.main.async {
+            guard let lastPauseTimestamp = self.lastPauseTimestamp else { return }
+            self.updateScene(for: time - lastPauseTimestamp)
+        }
     }
 
 //    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {

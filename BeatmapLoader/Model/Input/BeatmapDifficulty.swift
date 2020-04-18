@@ -96,9 +96,9 @@ internal struct BeatmapDifficultyModel: Decodable {
             case type = "_type"
         }
 
-        func asNoteEvent(with bpm: UInt, offset: TimeInterval) -> BeatmapNoteEvent {
+        func asNoteEvent(with bpm: UInt, offset: Double) -> BeatmapNoteEvent {
             let secondsPerBeat = (bpm > 0) ? (60.0/Double(bpm)):0.0
-            let seconds: TimeInterval = secondsPerBeat * time + offset
+            let seconds: TimeInterval = secondsPerBeat * time + offset/1000.0
 
             return .init(
                 time: seconds,
@@ -137,9 +137,9 @@ internal struct BeatmapDifficultyModel: Decodable {
             case width = "_width"
         }
 
-        func asObstacleEvent(with bpm: UInt, offset: TimeInterval) -> BeatmapObstacleEvent {
+        func asObstacleEvent(with bpm: UInt, offset: Double) -> BeatmapObstacleEvent {
             let secondsPerBeat = (bpm > 0) ? (60.0/Double(bpm)):0.0
-            let seconds: TimeInterval = secondsPerBeat * time + offset
+            let seconds: TimeInterval = secondsPerBeat * time + offset/1000.0
 
             return .init(
                 time: seconds,

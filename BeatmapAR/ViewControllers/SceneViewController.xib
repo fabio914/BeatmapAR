@@ -15,6 +15,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SceneViewController" customModule="BeatmapAR" customModuleProvider="target">
             <connections>
                 <outlet property="sceneView" destination="CCF-OX-R7M" id="NZC-Fj-aH3"/>
+                <outlet property="slider" destination="p8Y-zu-Fqt" id="TdK-xB-OEh"/>
                 <outlet property="timeLabel" destination="WdB-qi-QAE" id="LBR-BR-dPa"/>
                 <outlet property="view" destination="iN0-l3-epB" id="S3j-mS-D0B"/>
             </connections>

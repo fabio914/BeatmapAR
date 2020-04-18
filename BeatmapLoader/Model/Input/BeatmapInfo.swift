@@ -78,7 +78,7 @@ internal struct BeatmapInfoModel: Decodable {
     let songAuthorName: String
     let levelAuthorName: String
     let beatsPerMinute: UInt
-    let songTimeOffset: TimeInterval
+    let songTimeOffset: Double // ms
     let songFilename: Filename
     let coverImageFilename: Filename
     let difficultyBeatmapSets: [BeatmapSet]
