@@ -35,7 +35,7 @@ final class SceneViewController: UIViewController {
     private var rootNode: SCNNode?
 
     // MARK: - Parameters
-    private let rootOriginPosition = SCNVector3(-0.375, -0.375, -1.0)
+    private let rootOriginPosition = SCNVector3(-0.375, -0.25, -1.0)
     private let lightPosition = SCNVector3(0, 1.5, 0.5)
     private let visibleSeconds = 1.5
     private let distancePerBeat = 4.0
