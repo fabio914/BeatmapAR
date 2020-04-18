@@ -97,9 +97,16 @@ public struct BeatmapNoteEvent {
 }
 
 public struct BeatmapObstacleEvent {
+    public enum Direction {
+        case horizontal
+        case vertical
+    }
+
     public let time: TimeInterval
     public let duration: TimeInterval
-    // TODO: Add other properties
+    public let column: BeatmapColumn
+    public let direction: Direction
+    public let width: Int
 
     public func isContainedBy(_ range: ClosedRange<TimeInterval>) -> Bool {
         range.overlaps(time ... (time + max(0, duration)))

@@ -218,7 +218,16 @@ final class SceneViewController: UIViewController {
 
         let wallsNode = SCNNode()
 
-        // TODO: Add obstacles
+        for obstacleEvent in songDifficulty.obstacles {
+            let obstacleNode = ObstacleEventNode(
+                obstacleEvent: obstacleEvent,
+                distancePerSecond: distancePerSecond,
+                child: wallNode?.clone()
+            )
+
+            obstacleNode.isHidden = true
+            wallsNode.addChildNode(obstacleNode)
+        }
 
         rootNode.addChildNode(wallsNode)
         self.wallsNode = wallsNode
@@ -367,10 +376,39 @@ private final class ObstacleEventNode: SCNNode {
 
         if let child = child {
             child.position = .init()
+            child.scale = .init(1, 1, 1)
             self.addChildNode(child)
         }
 
+        let width = Double(obstacleEvent.width) * 0.25
 
+        let row: Double = {
+            switch obstacleEvent.direction {
+            case .vertical:
+                return 0.375
+            case .horizontal:
+                return 0.5
+            }
+        }()
+
+        let length: Double = obstacleEvent.duration * distancePerSecond
+
+        let height: Double = {
+            switch obstacleEvent.direction {
+            case .vertical:
+                return 1.0
+            case .horizontal:
+                return 0.5
+            }
+        }()
+
+        self.position = .init(
+            Double(obstacleEvent.column.rawValue) * 0.25 + (width - 0.25)/2.0,
+            row,
+            -(obstacleEvent.time * distancePerSecond) - length/2.0
+        )
+
+        self.scale = .init(width, height, length)
     }
 
     required init?(coder: NSCoder) {

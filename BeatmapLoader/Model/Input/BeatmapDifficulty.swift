@@ -121,6 +121,15 @@ internal struct BeatmapDifficultyModel: Decodable {
         enum ObstacleType: Int, Decodable {
             case vertical = 0
             case horizontal = 1
+
+            var direction: BeatmapObstacleEvent.Direction {
+                switch self {
+                case .vertical:
+                    return .vertical
+                case .horizontal:
+                    return .horizontal
+                }
+            }
         }
 
         let duration: Double /* in beats */
@@ -143,8 +152,10 @@ internal struct BeatmapDifficultyModel: Decodable {
 
             return .init(
                 time: seconds,
-                duration: secondsPerBeat * duration
-                // TODO: Add other properties
+                duration: duration * secondsPerBeat,
+                column: lineIndex.column,
+                direction: type.direction,
+                width: width
             )
         }
     }
