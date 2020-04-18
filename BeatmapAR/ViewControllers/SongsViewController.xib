@@ -29,6 +29,9 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DJl-SE-s5M" customClass="TableView" customModule="BeatmapAR" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="pgb-qz-FN4"/>
+                    </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="2qf-qN-D5d"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="bLL-hf-UGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -58,7 +61,6 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="mY7-HU-xzd" secondAttribute="bottom" id="0KF-Be-tdI"/>
                 <constraint firstItem="JpF-aL-lFQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="BZS-cc-6Eo"/>
-                <constraint firstItem="DJl-SE-s5M" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HGd-mh-5Z9"/>
                 <constraint firstItem="mY7-HU-xzd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="INd-8y-eY4"/>
                 <constraint firstAttribute="trailing" secondItem="V0r-k0-5Mk" secondAttribute="trailing" id="JNs-iZ-6fV"/>
                 <constraint firstAttribute="trailing" secondItem="mY7-HU-xzd" secondAttribute="trailing" id="Mwp-8P-qoG"/>
@@ -66,7 +68,8 @@
                 <constraint firstItem="DJl-SE-s5M" firstAttribute="top" secondItem="V0r-k0-5Mk" secondAttribute="bottom" id="g5E-Yu-o1O"/>
                 <constraint firstItem="V0r-k0-5Mk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ifn-SG-gz0"/>
                 <constraint firstItem="V0r-k0-5Mk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jIz-DX-8BC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DJl-SE-s5M" secondAttribute="trailing" id="vDl-6R-YR2"/>
+                <constraint firstItem="DJl-SE-s5M" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="kMU-vh-RKT"/>
+                <constraint firstItem="DJl-SE-s5M" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" priority="999" id="xU0-cu-I4U"/>
                 <constraint firstAttribute="bottom" secondItem="DJl-SE-s5M" secondAttribute="bottom" id="yIC-1e-j7x"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

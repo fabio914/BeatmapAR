@@ -28,6 +28,7 @@
                 <outlet property="notesLabel" destination="rkA-JA-7fm" id="hwO-Xn-m9r"/>
                 <outlet property="notesPerSecondLabel" destination="8NC-WW-gmK" id="RP7-Ij-PfD"/>
                 <outlet property="playViewContainer" destination="spx-IM-zmc" id="gvx-ow-NfU"/>
+                <outlet property="scrollView" destination="tTS-kz-Sx5" id="jtx-po-ezh"/>
                 <outlet property="segmentedControl" destination="zL6-L8-aoT" id="uEs-rN-OW7"/>
                 <outlet property="songArtistLabel" destination="3Uo-xB-0q4" id="tfD-xp-9Xw"/>
                 <outlet property="songNameLabel" destination="pHL-Au-ZVS" id="Ef5-Nf-hWc"/>
@@ -369,14 +370,17 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="yPb-D0-hiQ"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="2wL-rw-b5C" firstAttribute="width" secondItem="jIS-Ul-i3W" secondAttribute="width" priority="999" constant="-32" id="0o8-lU-3Fb"/>
                                 <constraint firstAttribute="bottom" secondItem="2wL-rw-b5C" secondAttribute="bottom" constant="16" id="7UP-xv-9lu"/>
                                 <constraint firstItem="2wL-rw-b5C" firstAttribute="top" secondItem="jIS-Ul-i3W" secondAttribute="top" constant="16" id="J0z-Wn-bb8"/>
-                                <constraint firstAttribute="trailing" secondItem="2wL-rw-b5C" secondAttribute="trailing" constant="16" id="ND1-ZK-jN2"/>
-                                <constraint firstItem="2wL-rw-b5C" firstAttribute="leading" secondItem="jIS-Ul-i3W" secondAttribute="leading" constant="16" id="dQj-4q-qFc"/>
+                                <constraint firstItem="2wL-rw-b5C" firstAttribute="centerX" secondItem="jIS-Ul-i3W" secondAttribute="centerX" id="ynw-Cj-yat"/>
                             </constraints>
                         </view>
                     </subviews>

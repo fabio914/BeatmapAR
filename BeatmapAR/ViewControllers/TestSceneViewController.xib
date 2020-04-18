@@ -26,11 +26,11 @@
                 <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCF-OX-R7M">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </arscnView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyx-lY-TED">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j28-2A-G8S">
+                    <rect key="frame" x="171.5" y="782" width="71.5" height="60"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8g-z7-Vr9">
-                            <rect key="frame" x="16" y="44" width="39.5" height="44"/>
+                            <rect key="frame" x="16" y="8" width="39.5" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLOSE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvA-4P-dtt">
                                     <rect key="frame" x="0.0" y="0.0" width="39.5" height="44"/>
@@ -61,23 +61,29 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="h8g-z7-Vr9" secondAttribute="bottom" id="G3y-xb-AHN"/>
+                        <constraint firstItem="h8g-z7-Vr9" firstAttribute="leading" secondItem="j28-2A-G8S" secondAttribute="leading" constant="16" id="2XJ-Vi-tTc"/>
+                        <constraint firstItem="h8g-z7-Vr9" firstAttribute="centerX" secondItem="j28-2A-G8S" secondAttribute="centerX" id="5Kj-ZF-Eb7"/>
+                        <constraint firstAttribute="height" constant="60" id="fRi-vK-Tmw"/>
+                        <constraint firstAttribute="trailing" secondItem="h8g-z7-Vr9" secondAttribute="trailing" constant="16" id="hia-cW-8d7"/>
+                        <constraint firstItem="h8g-z7-Vr9" firstAttribute="centerY" secondItem="j28-2A-G8S" secondAttribute="centerY" id="hms-A7-xak"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.094117647060000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="Kyx-lY-TED" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Arl-3F-Cnv"/>
-                <constraint firstAttribute="trailing" secondItem="Kyx-lY-TED" secondAttribute="trailing" id="CM0-u8-DDx"/>
                 <constraint firstItem="CCF-OX-R7M" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ESL-6g-Bm3"/>
                 <constraint firstAttribute="bottom" secondItem="CCF-OX-R7M" secondAttribute="bottom" id="EeQ-5e-cBj"/>
                 <constraint firstItem="CCF-OX-R7M" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HX9-8d-tbW"/>
-                <constraint firstItem="h8g-z7-Vr9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="JNO-vo-h5U"/>
                 <constraint firstAttribute="trailing" secondItem="CCF-OX-R7M" secondAttribute="trailing" id="Sd8-ab-ubB"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="Kyx-lY-TED" secondAttribute="bottom" constant="-44" id="ZJO-fB-FEj"/>
-                <constraint firstItem="Kyx-lY-TED" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gGt-eX-CiC"/>
+                <constraint firstItem="j28-2A-G8S" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="kKP-Ia-soA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="j28-2A-G8S" secondAttribute="bottom" constant="20" id="nYr-UU-UxP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="139" y="125"/>

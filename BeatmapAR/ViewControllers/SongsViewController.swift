@@ -25,6 +25,7 @@ final class SongsViewController: UIViewController {
         tableView.refreshControl = refreshControl
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(reload), for: .valueChanged)
+        tableView.indicatorStyle = .white
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +54,7 @@ extension SongsViewController: TestSceneCellDelegate {
 
     func didSelectTestScene(_ cell: TestSceneCell) {
         let viewController = TestSceneViewController()
-        viewController.modalPresentationStyle = .overFullScreen
+        viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true, completion: nil)
     }
 }
@@ -62,6 +63,7 @@ extension SongsViewController: SongCellDelegate {
 
     func song(_ cell: SongCell, didSelectFile file: BeatmapFilePreview) {
         let viewController = SongViewController(filePreview: file)
+        viewController.modalPresentationStyle = .formSheet
         present(viewController, animated: true, completion: nil)
     }
 

@@ -8,6 +8,7 @@ final class SongViewController: UIViewController {
         .lightContent
     }
 
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var songNameLabel: UILabel!
@@ -53,6 +54,8 @@ final class SongViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.indicatorStyle = .white
+
         let zipDataSource = ZIPBeatmapLoaderDataSource(with: filePreview.url)
         let loader = BeatmapLoader(dataSource: zipDataSource)
 
@@ -170,7 +173,7 @@ final class SongViewController: UIViewController {
                 songDifficulty: selectedDifficulty
             )
 
-            sceneViewController.modalPresentationStyle = .overFullScreen
+            sceneViewController.modalPresentationStyle = .fullScreen
             presentingViewController.present(sceneViewController, animated: true, completion: nil)
         })
     }

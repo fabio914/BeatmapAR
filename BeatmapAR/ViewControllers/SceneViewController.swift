@@ -43,7 +43,7 @@ final class SceneViewController: UIViewController {
         self.duration = duration
         self.songDifficulty = songDifficulty
 
-        let distancePerBeat = 2.0
+        let distancePerBeat = 2.5
         let beatsPerSecond = Double(bpm)/60.0
         self.distancePerSecond =  distancePerBeat * beatsPerSecond
 
