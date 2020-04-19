@@ -2,6 +2,8 @@ import Foundation
 
 internal typealias Filename = String
 
+// swiftlint:disable nesting
+
 internal struct BeatmapInfoModel: Decodable {
 
     struct BeatmapSet: Decodable {
@@ -50,9 +52,41 @@ internal struct BeatmapInfoModel: Decodable {
                 }
             }
 
+            struct CustomData: Decodable {
+
+                struct Color: Decodable {
+                    let red: Double
+                    let green: Double
+                    let blue: Double
+
+                    private enum CodingKeys: String, CodingKey {
+                        case red = "r"
+                        case green = "g"
+                        case blue = "b"
+                    }
+
+                    var uiColor: UIColor {
+                        .init(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1.0)
+                    }
+                }
+
+                let colorLeft: Color?
+                let colorRight: Color?
+                let obstacleColor: Color?
+
+                private enum CodingKeys: String, CodingKey {
+                    case colorLeft = "_colorLeft"
+                    case colorRight = "_colorRight"
+//                    case envColorLeft = "_envColorLeft"
+//                    case envColorRight = "_envColorRight"
+                    case obstacleColor = "_obstacleColor"
+                }
+            }
+
             let difficulty: String
             let difficultyRank: DifficultyRank
             let beatmapFilename: Filename
+            let customData: CustomData?
 
             private enum CodingKeys: String, CodingKey {
                 case difficulty = "_difficulty"
@@ -60,6 +94,7 @@ internal struct BeatmapInfoModel: Decodable {
                 case beatmapFilename = "_beatmapFilename"
 //                case noteJumpMovementSpeed = "_noteJumpMovementSpeed"
 //                case noteJumpStartBeatOffset = "_noteJumpStartBeatOffset"
+                case customData = "_customData"
             }
         }
 
@@ -102,3 +137,5 @@ internal struct BeatmapInfoModel: Decodable {
         case difficultyBeatmapSets = "_difficultyBeatmapSets"
     }
 }
+
+// swiftlint:enable nesting

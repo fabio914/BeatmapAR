@@ -60,7 +60,12 @@ public final class BeatmapLoader {
                         .map({ $0.asNoteEvent(with: info.beatsPerMinute, offset: preview.songTimeOffset) }),
                     obstacles: map.obstacles
                         .sorted(by: { $0.time < $1.time })
-                        .map({ $0.asObstacleEvent(with: info.beatsPerMinute, offset: preview.songTimeOffset) })
+                        .map({ $0.asObstacleEvent(with: info.beatsPerMinute, offset: preview.songTimeOffset) }),
+                    colors: BeatmapColors(
+                        leftColor: beatmap.customData?.colorLeft?.uiColor,
+                        rightColor: beatmap.customData?.colorRight?.uiColor,
+                        obstacleColor: beatmap.customData?.obstacleColor?.uiColor
+                    )
                 )
             })
 

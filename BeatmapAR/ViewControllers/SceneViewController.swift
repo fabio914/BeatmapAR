@@ -164,6 +164,7 @@ final class SceneViewController: UIViewController {
         self.lightSource = light
 
         loadSceneReferences()
+        customizeMaterials()
         buildMap()
     }
 
@@ -177,6 +178,23 @@ final class SceneViewController: UIViewController {
         self.wallNode = referenceNode?.childNode(withName: "Wall", recursively: false)
         self.lineNode = referenceNode?.childNode(withName: "Line", recursively: false)
         referenceNode?.isHidden = true
+    }
+
+    private func customizeMaterials() {
+        if let leftColor = songDifficulty.colors?.leftColor,
+            let material = redBlockNode?.geometry?.material(named: "Red material") {
+            material.diffuse.contents = leftColor
+        }
+
+        if let rightColor = songDifficulty.colors?.rightColor,
+            let material = blueBlockNode?.geometry?.material(named: "Blue material") {
+            material.diffuse.contents = rightColor
+        }
+
+        if let obstacleColor = songDifficulty.colors?.obstacleColor,
+            let material = wallNode?.childNodes.first?.geometry?.material(named: "Wall material") {
+            material.diffuse.contents = obstacleColor.withAlphaComponent(0.7)
+        }
     }
 
     // Consider building the map incrementally

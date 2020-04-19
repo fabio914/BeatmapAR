@@ -113,11 +113,18 @@ public struct BeatmapObstacleEvent {
     }
 }
 
+public struct BeatmapColors {
+    public let leftColor: UIColor?
+    public let rightColor: UIColor?
+    public let obstacleColor: UIColor?
+}
+
 public struct BeatmapSongDifficulty {
     public let name: String
     public let difficulty: BeatmapDifficulty
     public let notes: [BeatmapNoteEvent]
     public let obstacles: [BeatmapObstacleEvent]
+    public let colors: BeatmapColors?
 
     public let noteCount: Int
     public let bombCount: Int
@@ -127,12 +134,14 @@ public struct BeatmapSongDifficulty {
         name: String,
         difficulty: BeatmapDifficulty,
         notes: [BeatmapNoteEvent],
-        obstacles: [BeatmapObstacleEvent]
+        obstacles: [BeatmapObstacleEvent],
+        colors: BeatmapColors?
     ) {
         self.name = name
         self.difficulty = difficulty
         self.notes = notes
         self.obstacles = obstacles
+        self.colors = colors
 
         self.bombCount = notes.filter({ $0.note.isBomb }).count
         self.noteCount = notes.count - bombCount
