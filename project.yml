@@ -46,7 +46,7 @@ targets:
          - Teko-Regular.ttf
          - Teko-SemiBold.ttf
         UIFileSharingEnabled: true
-#        LSSupportsOpeningDocumentsInPlace: true
+        LSSupportsOpeningDocumentsInPlace: false
         CFBundleDocumentTypes:
          - CFBundleTypeName: Zip archive
            CFBundleTypeRole: Editor
