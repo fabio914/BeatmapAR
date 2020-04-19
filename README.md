@@ -6,6 +6,8 @@ Beat Saber map (a.k.a beatmap) visualizer in AR for iOS.
 
 This is a very early prototype! It's not optimized and a lot of improvements can be made, use at your own risk!
 
+[![YouTube video](Images/Screenshots/youtube.jpg)](https://www.youtube.com/watch?v=VYCqqi2B0t0)
+
 ## Screenshots
 
 ![1](Images/Screenshots/1.jpg)
