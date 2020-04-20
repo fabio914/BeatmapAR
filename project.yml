@@ -56,6 +56,11 @@ targets:
            UTTypeTagSpecification:
              public.filename-extension: zip
              public.mime-type: application/zip
+        CFBundleURLTypes:
+          - CFBundleTypeRole: Editor
+            CFBundleURLName: beatsaver
+            CFBundleURLSchemes:
+              - beatsaver
     sources:
       - path: README.md
         buildPhase: none
